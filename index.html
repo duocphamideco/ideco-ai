@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* === GIỮ NGUYÊN TOÀN BỘ STYLE GỐC === */
+        /* === GIá»® NGUYÃN TOÃN Bá» STYLE Gá»C === */
         :root {
             --primary: #0062E6;
             --primary-light: #33AEFF;
@@ -62,7 +62,7 @@
             touch-action: pan-y;
         }
         
-        /* === HEADER CHÍNH === */
+        /* === HEADER CHÃNH === */
         .mobile-header {
             position: fixed;
             top: 0;
@@ -551,7 +551,7 @@
             border-radius: 10px;
         }
 
-        /* LỚP PHỦ ĐĂNG NHẬP */
+        /* Lá»P PHá»¦ ÄÄNG NHáº¬P */
         .login-overlay {
             position: fixed;
             top: 0;
@@ -647,7 +647,7 @@
             font-weight: 600;
             min-height: 20px;
         }
-        /* Ẩn nội dung chính khi chưa đăng nhập */
+        /* áº¨n ná»i dung chÃ­nh khi chÆ°a ÄÄng nháº­p */
         body:not(.authenticated) .main-content,
         body:not(.authenticated) .mobile-header,
         body:not(.authenticated) .floating-trigger,
@@ -666,21 +666,21 @@
     </style>
 </head>
 <body>
-    <!-- LỚP PHỦ ĐĂNG NHẬP -->
+    <!-- Lá»P PHá»¦ ÄÄNG NHáº¬P -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <div class="login-icon">
                 <i class="fas fa-lock"></i>
             </div>
-            <h2>🔐 BẢO MẬT</h2>
-            <p>Vui lòng nhập mật khẩu để truy cập</p>
-            <input type="password" class="password-input" id="passwordInput" placeholder="••••••••" autofocus>
-            <button class="login-btn" id="loginBtn"><i class="fas fa-arrow-right-to-bracket" style="margin-right: 8px;"></i>XÁC NHẬN</button>
+            <h2>ð Báº¢O Máº¬T</h2>
+            <p>Vui lÃ²ng nháº­p máº­t kháº©u Äá» truy cáº­p</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" autofocus>
+            <button class="login-btn" id="loginBtn"><i class="fas fa-arrow-right-to-bracket" style="margin-right: 8px;"></i>XÃC NHáº¬N</button>
             <div class="error-message" id="loginError"></div>
         </div>
     </div>
 
-    <!-- GIAO DIỆN CHÍNH -->
+    <!-- GIAO DIá»N CHÃNH -->
     <header class="mobile-header">
         <div class="header-left">
             <div class="header-logo">
@@ -688,7 +688,7 @@
             </div>
             <div class="header-title">
                 <h1>AI BOARD PRO</h1>
-                <p>Hệ thống công cụ thông minh</p>
+                <p>Há» thá»ng cÃ´ng cá»¥ thÃ´ng minh</p>
             </div>
         </div>
         <div class="header-actions">
@@ -703,12 +703,12 @@
     
     <main class="main-content">
         <section class="hero-section">
-            <h2>🚀 HỆ THỐNG IDECO AI</h2>
-            <p>Tổng hợp 17 công cụ thông minh hỗ trợ kho vận, kinh doanh và đào tạo</p>
+            <h2>ð Há» THá»NG IDECO AI</h2>
+            <p>Tá»ng há»£p 17 cÃ´ng cá»¥ thÃ´ng minh há» trá»£ kho váº­n, kinh doanh vÃ  ÄÃ o táº¡o</p>
         </section>
         
         <div class="tools-grid" id="toolsGrid">
-            <!-- Tools sẽ được tạo động bằng JavaScript -->
+            <!-- Tools sáº½ ÄÆ°á»£c táº¡o Äá»ng báº±ng JavaScript -->
         </div>
     </main>
     
@@ -719,11 +719,11 @@
     <nav class="bottom-nav">
         <a href="#" class="nav-item active" id="navHome">
             <i class="fas fa-home"></i>
-            <span>Trang chủ</span>
+            <span>Trang chá»§</span>
         </a>
         <a href="#" class="nav-item" id="navTools">
             <i class="fas fa-th-large"></i>
-            <span>Công cụ</span>
+            <span>CÃ´ng cá»¥</span>
         </a>
         <a href="#" class="nav-item" id="navAI">
             <i class="fas fa-robot"></i>
@@ -731,7 +731,7 @@
         </a>
         <a href="#" class="nav-item" id="navProfile">
             <i class="fas fa-user"></i>
-            <span>Cá nhân</span>
+            <span>CÃ¡ nhÃ¢n</span>
         </a>
     </nav>
     
@@ -739,41 +739,41 @@
     
     <div class="aib-modal-container" id="aibModal">
         <div class="aib-modal-header">
-            <div class="aib-modal-title">HỆ THỐNG IDECO AI</div>
+            <div class="aib-modal-title">Há» THá»NG IDECO AI</div>
             <div class="aib-modal-close" id="aibCloseBtn">&times;</div>
         </div>
         
         <div class="aib-modal-tabs" id="categoryTabs">
-            <div class="aib-tab active" data-category="inventory">📦 Kho Vận</div>
-            <div class="aib-tab" data-category="sales">🎨 Kinh Doanh</div>
-            <div class="aib-tab" data-category="special">🤖 Đào Tạo</div>
+            <div class="aib-tab active" data-category="inventory">ð¦ Kho Váº­n</div>
+            <div class="aib-tab" data-category="sales">ð¨ Kinh Doanh</div>
+            <div class="aib-tab" data-category="special">ð¤ ÄÃ o Táº¡o</div>
         </div>
         
         <div class="aib-modal-content" id="aibContent">
-            <!-- Nội dung sẽ được tạo động -->
+            <!-- Ná»i dung sáº½ ÄÆ°á»£c táº¡o Äá»ng -->
         </div>
     </div>
     
     <script>
-        // DỮ LIỆU CÔNG CỤ (17 TOOLS)
+        // Dá»® LIá»U CÃNG Cá»¤ (17 TOOLS)
         const aiTools = [
-            { id: 1, title: "Xử lý Phiếu thuốc giao FEFO", desc: "Nhập liệu biên bản - Kho", url: "https://phantichphieu.netlify.app/", category: "inventory", icon: "ic-1", backup: false },
-            { id: 2, title: "Tổng hợp đơn thuốc & VAT MISA", desc: "Tổng hợp đơn hàng - Hóa đơn VAT", url: "https://lancuoi.netlify.app", category: "inventory", icon: "ic-2", backup: false },
-            { id: 3, title: "Lập bảng phân tích P&L - Bảng giá thuốc", desc: "Phân tích chiết khấu trên ERP", url: "https://phantichbanggia.netlify.app/", category: "inventory", icon: "ic-3", backup: false },
-            { id: 4, title: "Khai báo cáo giao dịch khách hàng MỚI AI", desc: "tạo APP trên điện thoại cho tiện giao dịch", url: "https://idecokhachhang01.netlify.app/", category: "sales", icon: "ic-4", backup: false },
-            { id: 5, title: "Tổng hợp đơn thuốc/ngày", desc: "Dự báo & yêu cầu đặt hàng", url: "https://dubaodonhang01.netlify.app/", category: "sales", icon: "ic-5", backup: false },
-            { id: 6, title: "Kiểm tra hóa đơn Số lô- Hạn Dùng trong 5 ngày lưu", desc: "Bảng website", url: "https://kiemtrahoadon12026.netlify.app", category: "sales", icon: "ic-6", backup: false },
-            { id: 7, title: "Kiểm Tra Giá CNT & Dự Báo", desc: "So sánh giá chuỗi Nhà thuốc", url: "https://kiemtracnt-dathang.netlify.app/", category: "sales", icon: "ic-7", backup: false },
-            { id: 8, title: "Tìm khách hàng & Tra cứu SĐT", desc: "Công cụ Sales 01", url: "https://timnpp.netlify.app/", category: "sales", icon: "ic-8", backup: false },
-            { id: 9, title: "Lọc khách hàng từ Link Web", desc: "Công cụ Sales 02", url: "https://lockhachhang.netlify.app/", category: "sales", icon: "ic-9", backup: false },
-            { id: 10, title: "Tạo Prompt Poster", desc: "Content quảng cáo tự động", url: "https://taoprompt2026.netlify.app/", category: "sales", icon: "ic-10", backup: false },
-            { id: 11, title: "Tạo Ảnh & Video AI", desc: "Thiết kế & Giải trí", url: "https://idecoweb.netlify.app/", category: "sales", icon: "ic-11", backup: false },
+            { id: 1, title: "Xá»­ lÃ½ Phiáº¿u thuá»c giao FEFO", desc: "Nháº­p liá»u biÃªn báº£n - Kho", url: "https://phantichphieu.netlify.app/", category: "inventory", icon: "ic-1", backup: false },
+            { id: 2, title: "Tá»ng há»£p ÄÆ¡n thuá»c & VAT MISA", desc: "Tá»ng há»£p ÄÆ¡n hÃ ng - HÃ³a ÄÆ¡n VAT", url: "https://lancuoi.netlify.app", category: "inventory", icon: "ic-2", backup: false },
+            { id: 3, title: "Láº­p báº£ng phÃ¢n tÃ­ch P&L - Báº£ng giÃ¡ thuá»c", desc: "PhÃ¢n tÃ­ch chiáº¿t kháº¥u trÃªn ERP", url: "https://phantichbanggia.netlify.app/", category: "inventory", icon: "ic-3", backup: false },
+            { id: 4, title: "Khai bÃ¡o cÃ¡o giao dá»ch khÃ¡ch hÃ ng Má»I AI", desc: "táº¡o APP trÃªn Äiá»n thoáº¡i cho tiá»n giao dá»ch", url: "https://idecokhachhang01.netlify.app/", category: "sales", icon: "ic-4", backup: false },
+            { id: 5, title: "Tá»ng há»£p ÄÆ¡n thuá»c/ngÃ y", desc: "Dá»± bÃ¡o & yÃªu cáº§u Äáº·t hÃ ng", url: "https://dubaodonhang01.netlify.app/", category: "sales", icon: "ic-5", backup: false },
+            { id: 6, title: "Kiá»m tra hÃ³a ÄÆ¡n Sá» lÃ´- Háº¡n DÃ¹ng trong 5 ngÃ y lÆ°u", desc: "Báº£ng website", url: "https://kiemtrahoadon12026.netlify.app", category: "sales", icon: "ic-6", backup: false },
+            { id: 7, title: "Kiá»m Tra GiÃ¡ CNT & Dá»± BÃ¡o", desc: "So sÃ¡nh giÃ¡ chuá»i NhÃ  thuá»c", url: "https://kiemtracnt-dathang.netlify.app/", category: "sales", icon: "ic-7", backup: false },
+            { id: 8, title: "TÃ¬m khÃ¡ch hÃ ng & Tra cá»©u SÄT", desc: "CÃ´ng cá»¥ Sales 01", url: "https://timnpp.netlify.app/", category: "sales", icon: "ic-8", backup: false },
+            { id: 9, title: "Lá»c khÃ¡ch hÃ ng tá»« Link Web", desc: "CÃ´ng cá»¥ Sales 02", url: "https://lockhachhang.netlify.app/", category: "sales", icon: "ic-9", backup: false },
+            { id: 10, title: "Táº¡o Prompt Poster", desc: "Content quáº£ng cÃ¡o tá»± Äá»ng", url: "https://taoprompt2026.netlify.app/", category: "sales", icon: "ic-10", backup: false },
+            { id: 11, title: "Táº¡o áº¢nh & Video AI", desc: "Thiáº¿t káº¿ & Giáº£i trÃ­", url: "https://idecoweb.netlify.app/", category: "sales", icon: "ic-11", backup: false },
             { id: 12, title: "Capture Video", desc: "Backup System", url: "https://capturevideo.netlify.app/", category: "sales", icon: "ic-12", backup: true },
-            { id: 13, title: "Tư Vấn Kế toán Kho - Voice AI", desc: "Hỏi đáp bán hàng bằng giọng nói", url: "https://trochuyen.netlify.app/", category: "special", icon: "ic-13", backup: false },
-            { id: 14, title: "Tìm hiểu nghiệp vụ kế toán", desc: "Hỏi đáp chuyên môn nghiệp vụ", url: "https://ketoanideco.netlify.app", category: "special", icon: "ic-14", backup: false },
-            { id: 15, title: "Cắt ảnh", desc: "Dủng để cắt ảnh lại theo ý muốn", url: "https://scrop-ideco01.netlify.app", category: "special", icon: "ic-15", backup: false },
-            { id: 16, title: "Cắt ảnh - đồng nhất nhân vật by prompt tạo ảnh", desc: "Sử dụng cắt ảnh chọn - tạo prompt ảnh", url: "https://hilarious-palmier-bf2f24.netlify.app/", category: "special", icon: "ic-16", backup: false },
-            { id: 17, title: "Tạo Podcast", desc: "Chuyển giọng nói thành văn bản - tạo podcast ", url: "https://thauam-01.netlify.app/", category: "special", icon: "ic-17", backup: false }
+            { id: 13, title: "TÆ° Váº¥n Káº¿ toÃ¡n Kho - Voice AI", desc: "Há»i ÄÃ¡p bÃ¡n hÃ ng báº±ng giá»ng nÃ³i", url: "https://trochuyen.netlify.app/", category: "special", icon: "ic-13", backup: false },
+            { id: 14, title: "TÃ¬m hiá»u nghiá»p vá»¥ káº¿ toÃ¡n", desc: "Há»i ÄÃ¡p chuyÃªn mÃ´n nghiá»p vá»¥", url: "https://ketoanideco.netlify.app", category: "special", icon: "ic-14", backup: false },
+            { id: 15, title: "CÄÌt aÌnh", desc: "DuÌng ÄÃªÌ cÄÌt aÌnh laÌ£i theo yÌ muÃ´Ìn", url: "https://scrop-ideco01.netlify.app", category: "special", icon: "ic-15", backup: false },
+            { id: 16, title: "CÄÌt aÌnh - ÄÃ´Ìng nhÃ¢Ìt nhÃ¢n vÃ¢Ì£t by prompt taÌ£o aÌnh", desc: "SÆ°Ì duÌ£ng cÄÌt aÌnh choÌ£n - taÌ£o prompt aÌnh", url: "https://hilarious-palmier-bf2f24.netlify.app/", category: "special", icon: "ic-16", backup: false },
+            { id: 17, title: "Táº¡o Podcast", desc: "Chuyá»n giá»ng nÃ³i thÃ nh vÄn báº£n - táº¡o podcast ", url: "https://thauam-01.netlify.app/", category: "special", icon: "ic-17", backup: false }
         ];
 
         const iconUrls = {
@@ -797,12 +797,12 @@
         };
 
         const categoryNames = {
-            inventory: "📦 KHO VẬN & KẾ TOÁN",
-            sales: "🎨 KINH DOANH & MKT",
-            special: "🤖 ĐÀO TẠO & NGHIỆP VỤ"
+            inventory: "ð¦ KHO Váº¬N & Káº¾ TOÃN",
+            sales: "ð¨ KINH DOANH & MKT",
+            special: "ð¤ ÄÃO Táº O & NGHIá»P Vá»¤"
         };
 
-        // Hàm tạo grid tools trang chủ
+        // HÃ m táº¡o grid tools trang chá»§
         function initToolsGrid() {
             const toolsGrid = document.getElementById('toolsGrid');
             if (!toolsGrid) return;
@@ -827,7 +827,7 @@
             });
         }
 
-        // Hàm tạo nội dung modal
+        // HÃ m táº¡o ná»i dung modal
         function initAIBModal() {
             const aibContent = document.getElementById('aibContent');
             if (!aibContent) return;
@@ -865,7 +865,7 @@
                     });
                 }
             });
-            // Hiển thị category đầu tiên
+            // Hiá»n thá» category Äáº§u tiÃªn
             if (aiTools.length > 0) showCategory(aiTools[0].category);
         }
 
@@ -879,7 +879,7 @@
             });
         }
 
-        // XỬ LÝ ĐĂNG NHẬP
+        // Xá»¬ LÃ ÄÄNG NHáº¬P
         const CORRECT_PASSWORD = "ideco@2026";
         const loginOverlay = document.getElementById('loginOverlay');
         const passwordInput = document.getElementById('passwordInput');
@@ -888,10 +888,10 @@
 
         function unlockApp() {
             document.body.classList.add('authenticated');
-            // Khởi tạo lại dữ liệu
+            // Khá»i táº¡o láº¡i dá»¯ liá»u
             initToolsGrid();
             initAIBModal();
-            // Gán sự kiện cho các thành phần
+            // GÃ¡n sá»± kiá»n cho cÃ¡c thÃ nh pháº§n
             attachEvents();
         }
 
@@ -946,7 +946,7 @@
                 });
             });
 
-            // Nav Tools: scroll tới tools grid
+            // Nav Tools: scroll tá»i tools grid
             if (navTools) {
                 navTools.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -970,7 +970,7 @@
             if (navProfile) {
                 navProfile.addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('Tính năng đang phát triển');
+                    alert('TÃ­nh nÄng Äang phÃ¡t triá»n');
                 });
             }
 
@@ -986,7 +986,7 @@
             if (searchBtn) {
                 searchBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    alert('Nhập từ khóa để tìm công cụ...');
+                    alert('Nháº­p tá»« khÃ³a Äá» tÃ¬m cÃ´ng cá»¥...');
                 });
             }
 
@@ -998,13 +998,13 @@
             });
         }
 
-        // Xử lý đăng nhập
+        // Xá»­ lÃ½ ÄÄng nháº­p
         loginBtn.addEventListener('click', () => {
             if (passwordInput.value === CORRECT_PASSWORD) {
                 loginError.textContent = '';
                 unlockApp();
             } else {
-                loginError.textContent = '❌ Mật khẩu không đúng';
+                loginError.textContent = 'â Máº­t kháº©u khÃ´ng ÄÃºng';
                 passwordInput.value = '';
                 passwordInput.focus();
             }
@@ -1013,13 +1013,13 @@
             if (e.key === 'Enter') loginBtn.click();
         });
 
-        // Khởi tạo dữ liệu trước (sẽ hiển thị sau đăng nhập)
+        // Khá»i táº¡o dá»¯ liá»u trÆ°á»c (sáº½ hiá»n thá» sau ÄÄng nháº­p)
         window.addEventListener('DOMContentLoaded', () => {
             initToolsGrid();
             initAIBModal();
         });
 
-        // Chống zoom double-tap
+        // Chá»ng zoom double-tap
         let lastTouchEnd = 0;
         document.addEventListener('touchend', (e) => {
             const now = Date.now();
@@ -1027,5 +1027,6 @@
             lastTouchEnd = now;
         }, false);
     </script>
+  <script type="module" src="/index.tsx"></script>
 </body>
 </html>
