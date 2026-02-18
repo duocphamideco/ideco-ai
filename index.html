@@ -3,585 +3,593 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI Board Pro - Secure</title>
+    <title>IDECO AI - Chuyên đề</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* === GIá»® NGUYÃN TOÃN Bá» STYLE Gá»C === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         :root {
-            --primary: #0062E6;
-            --primary-light: #33AEFF;
-            --danger: #d63031;
-            --success: #2e7d32;
-            --warning: #f57f17;
-            --purple: #7b1fa2;
-            --color-legal: #0077c2;
-            --color-inventory: #2e7d32;
-            --color-sales: #7b1fa2;
-            --color-special: #f57f17;
-            --bg-main: #f0f2f5;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            
+            --bg-main: #f8fafc;
             --bg-card: #ffffff;
-            --bg-header: #ffffff;
-            --bg-hover: #f8f9fa;
-            --text-primary: #1a1a1a;
-            --text-secondary: #666666;
-            --text-light: #999999;
-            --border: #e0e0e0;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --bg-card-alt: #f1f5f9;
+            
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 24px;
+            
             --space-xs: 4px;
             --space-sm: 8px;
             --space-md: 16px;
             --space-lg: 24px;
             --space-xl: 32px;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        html, body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-main);
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-main);
             color: var(--text-primary);
-            overflow-x: hidden;
-            height: 100%;
-            touch-action: pan-y;
-        }
-        
-        /* === HEADER CHÃNH === */
-        .mobile-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            padding: 16px var(--space-md);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-        
-        .header-logo {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-        
-        .header-title h1 {
-            font-size: 18px;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-        
-        .header-title p {
-            font-size: 11px;
-            opacity: 0.9;
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: var(--space-sm);
-        }
-        
-        .header-btn {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-        .floating-trigger {
-            position: fixed;
-            bottom: 80px;
-            right: var(--space-md);
-            z-index: 999;
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 6px 20px rgba(0, 98, 230, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-            border: 3px solid white;
-        }
-        
-        .floating-trigger:hover, .floating-trigger:active {
-            transform: scale(1.1);
-            box-shadow: 0 8px 24px rgba(0, 98, 230, 0.6);
-        }
-        
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 6px 20px rgba(0, 98, 230, 0.4); }
-            50% { box-shadow: 0 6px 24px rgba(0, 98, 230, 0.8); }
-        }
-        
-        .main-content {
-            margin-top: 72px;
-            padding: var(--space-md);
-            padding-bottom: 140px;
-        }
-        
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            color: white;
-            margin-bottom: var(--space-lg);
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .hero-section h2 {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: var(--space-sm);
-        }
-        
-        .hero-section p {
-            font-size: 14px;
-            opacity: 0.9;
             line-height: 1.5;
         }
-        
+
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: var(--space-lg) var(--space-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-title {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .app-title i {
+            font-size: 32px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 16px;
+        }
+
+        .app-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .user-greeting {
+            margin-top: var(--space-md);
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .user-greeting i {
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            padding: var(--space-md);
+            background: white;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-box {
+            background: var(--bg-main);
+            border-radius: 40px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .search-box i {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Categories */
+        .categories-section {
+            padding: var(--space-md);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .category-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-md) var(--space-sm);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1px solid var(--border-light);
+        }
+
+        .category-item.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-card-alt);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-sm);
+            font-size: 24px;
+            color: var(--primary);
+            transition: all 0.2s;
+        }
+
+        .category-item.active .category-icon {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .category-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .category-count {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+
+        /* Tools Grid */
+        .tools-section {
+            padding: 0 var(--space-md) var(--space-xl);
+        }
+
+        .tools-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .tools-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .tools-count {
+            background: var(--bg-card-alt);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
         .tools-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: var(--space-md);
+            gap: var(--space-sm);
         }
-        
+
         .tool-card {
-            background: var(--bg-card);
+            background: white;
             border-radius: var(--radius-md);
             padding: var(--space-md);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border-left: 4px solid var(--primary);
-            text-decoration: none;
-            display: block;
-            color: inherit;
-            cursor: pointer;
-        }
-        
-        .tool-card:hover, .tool-card:active {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .tool-card-header {
             display: flex;
             align-items: center;
             gap: var(--space-md);
-            margin-bottom: var(--space-sm);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.2s;
         }
-        
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .tool-icon-wrapper {
+            position: relative;
+        }
+
         .tool-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: var(--radius-sm);
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             background-size: cover;
             background-position: center;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-sm);
+            background-color: var(--bg-card-alt);
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 2px solid transparent;
         }
-        
+
+        .tool-icon:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .tool-backup-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--danger);
+            color: white;
+            font-size: 8px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+
         .tool-info {
             flex: 1;
         }
-        
+
         .tool-title {
             font-size: 15px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 2px;
-            line-height: 1.3;
-        }
-        
-        .tool-subtitle {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        
-        .tool-badge {
-            position: absolute;
-            top: var(--space-md);
-            right: var(--space-md);
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 8px;
-            border-radius: 20px;
-            background: #ffe6e6;
-            color: var(--danger);
-            border: 1px solid #fab1a0;
-        }
-        
-        .tool-card.category-inventory { border-left-color: var(--color-inventory); }
-        .tool-card.category-sales { border-left-color: var(--color-sales); }
-        .tool-card.category-special { border-left-color: var(--color-special); }
-        
-        /* === MODAL AI BOARD === */
-        .aib-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 2000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .aib-modal-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-        
-        .aib-modal-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2001;
+            margin-bottom: 4px;
             display: flex;
-            flex-direction: column;
-            background: var(--bg-main);
-            transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        
-        .aib-modal-container.active {
-            transform: translateY(0);
-        }
-        
-        .aib-modal-header {
-            padding: var(--space-md);
-            background: var(--bg-header);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-shrink: 0;
+            gap: var(--space-xs);
         }
-        
-        .aib-modal-title {
-            font-size: 20px;
+
+        .tool-id {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            background: var(--bg-card-alt);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .tool-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .tool-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .tool-category-tag {
+            background: var(--bg-card-alt);
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Quick Stats */
+        .stats-section {
+            padding: 0 var(--space-md) var(--space-md);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .stat-value {
+            font-size: 24px;
             font-weight: 800;
-            background: linear-gradient(45deg, var(--primary), var(--primary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
+            line-height: 1.2;
         }
-        
-        .aib-modal-close {
-            width: 40px;
-            height: 40px;
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
-            background: var(--bg-hover);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-        
-        .aib-modal-tabs {
-            display: flex;
-            background: var(--bg-header);
-            border-bottom: 1px solid var(--border);
-            overflow-x: auto;
-            flex-shrink: 0;
-            scrollbar-width: none;
-        }
-        
-        .aib-modal-tabs::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .aib-tab {
-            padding: 14px 20px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            white-space: nowrap;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        
-        .aib-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        
-        .aib-modal-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: var(--space-md);
-        }
-        
-        .aib-category-section {
-            margin-bottom: var(--space-xl);
-        }
-        
-        .aib-category-header {
-            padding: var(--space-md) 0;
-            margin-bottom: var(--space-md);
-            border-bottom: 2px solid;
-            font-size: 16px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .category-inventory .aib-category-header {
-            color: var(--color-inventory);
-            border-bottom-color: var(--color-inventory);
-        }
-        
-        .category-sales .aib-category-header {
-            color: var(--color-sales);
-            border-bottom-color: var(--color-sales);
-        }
-        
-        .category-special .aib-category-header {
-            color: var(--color-special);
-            border-bottom-color: var(--color-special);
-        }
-        
-        .category-count {
-            background: currentColor;
             color: white;
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-        
-        .aib-tool-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-        
-        .aib-modal-tool {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-md);
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            transition: all 0.2s;
-            border-left: 4px solid transparent;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.4);
             cursor: pointer;
+            transition: all 0.2s;
+            border: 3px solid white;
+            z-index: 100;
         }
-        
-        .aib-modal-tool:hover, .aib-modal-tool:active {
-            transform: translateX(4px);
-            box-shadow: var(--shadow-md);
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37,99,235,0.6);
         }
-        
-        .category-inventory .aib-modal-tool { border-left-color: var(--color-inventory); }
-        .category-sales .aib-modal-tool { border-left-color: var(--color-sales); }
-        .category-special .aib-modal-tool { border-left-color: var(--color-special); }
-        
-        .aib-modal-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-sm);
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-        }
-        
-        .aib-modal-tool-info {
-            flex: 1;
-        }
-        
-        .aib-modal-tool-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-        
-        .aib-modal-tool-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        
-        .aib-modal-tool-number {
-            font-size: 12px;
-            font-weight: 800;
-            color: var(--text-light);
-            min-width: 24px;
-        }
-        
+
+        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
-            background: var(--bg-header);
+            right: 0;
+            background: white;
             display: flex;
             justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
+            padding: 8px 0 12px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            border-top: 1px solid var(--border-light);
+            z-index: 100;
         }
-        
+
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: var(--text-secondary);
+            color: var(--text-muted);
+            font-size: 10px;
+            gap: 4px;
             flex: 1;
             cursor: pointer;
+            transition: color 0.2s;
         }
-        
+
         .nav-item i {
             font-size: 20px;
-            margin-bottom: 4px;
         }
-        
-        .nav-item span {
-            font-size: 11px;
-        }
-        
+
         .nav-item.active {
             color: var(--primary);
         }
-        
-        @media (min-width: 768px) {
-            .tools-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .aib-modal-container {
-                width: 90%;
-                height: 90%;
-                top: 5%;
-                left: 5%;
-                border-radius: var(--radius-xl);
-                box-shadow: var(--shadow-lg);
-            }
-            .floating-trigger {
-                bottom: 100px;
-                right: 40px;
-                width: 64px;
-                height: 64px;
-                font-size: 28px;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .tools-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .aib-modal-container {
-                width: 80%;
-                left: 10%;
-            }
-        }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .slide-up {
-            animation: slideUp 0.4s ease forwards;
-        }
-        
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 10px;
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.2s;
         }
 
-        /* Lá»P PHá»¦ ÄÄNG NHáº¬P */
+        .modal-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            padding: var(--space-lg);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-container.active {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-tools-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .modal-tool-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-card-alt);
+            border-radius: var(--radius-md);
+            border-left: 4px solid transparent;
+        }
+
+        .modal-tool-item.sales { border-left-color: var(--primary); }
+        .modal-tool-item.inventory { border-left-color: var(--success); }
+        .modal-tool-item.special { border-left-color: var(--secondary); }
+
+        .modal-tool-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        /* Login Overlay */
         .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 3000;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: var(--space-md);
-            transition: opacity 0.3s ease;
         }
+
         .login-card {
-            background: var(--bg-card);
-            max-width: 360px;
-            width: 100%;
+            background: white;
             border-radius: var(--radius-xl);
-            padding: var(--space-xl) var(--space-lg);
-            box-shadow: var(--shadow-lg);
+            padding: var(--space-xl);
+            width: 100%;
+            max-width: 360px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-            animation: slideUp 0.4s ease;
         }
+
         .login-icon {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(145deg, var(--primary), var(--primary-light));
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -589,191 +597,239 @@
             margin: 0 auto var(--space-lg);
             color: white;
             font-size: 36px;
-            box-shadow: 0 10px 20px rgba(0,98,230,0.3);
         }
-        .login-card h2 {
-            font-size: 22px;
+
+        .login-title {
+            font-size: 24px;
             font-weight: 800;
-            margin-bottom: var(--space-sm);
-            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            margin-bottom: var(--space-xs);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .login-card p {
+
+        .login-subtitle {
             color: var(--text-secondary);
             font-size: 14px;
             margin-bottom: var(--space-lg);
-            font-weight: 500;
         }
-        .password-input {
+
+        .password-field {
             width: 100%;
             padding: 16px 20px;
             border: 2px solid var(--border);
-            border-radius: 60px;
+            border-radius: 40px;
             font-size: 16px;
             outline: none;
-            transition: all 0.2s;
-            background: var(--bg-hover);
             margin-bottom: var(--space-md);
             text-align: center;
-            letter-spacing: 2px;
             font-weight: 600;
         }
-        .password-input:focus {
+
+        .password-field:focus {
             border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(0,98,230,0.1);
         }
-        .login-btn {
+
+        .login-button {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 60px;
+            border-radius: 40px;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 8px 20px rgba(0,98,230,0.3);
-            margin-bottom: var(--space-md);
+            transition: transform 0.2s;
         }
-        .login-btn:active {
-            transform: scale(0.97);
+
+        .login-button:active {
+            transform: scale(0.98);
         }
+
         .error-message {
             color: var(--danger);
             font-size: 13px;
+            margin-top: var(--space-sm);
             font-weight: 600;
-            min-height: 20px;
         }
-        /* áº¨n ná»i dung chÃ­nh khi chÆ°a ÄÄng nháº­p */
+
+        /* Utilities */
+        .main-content {
+            padding-bottom: 80px;
+        }
+
         body:not(.authenticated) .main-content,
-        body:not(.authenticated) .mobile-header,
-        body:not(.authenticated) .floating-trigger,
-        body:not(.authenticated) .bottom-nav,
-        body:not(.authenticated) .aib-modal-overlay,
-        body:not(.authenticated) .aib-modal-container {
+        body:not(.authenticated) .fab,
+        body:not(.authenticated) .bottom-nav {
             display: none;
         }
+
         body.authenticated .login-overlay {
             display: none;
         }
-        body.authenticated .main-content { display: block; }
-        body.authenticated .mobile-header { display: flex; }
-        body.authenticated .floating-trigger { display: flex; }
-        body.authenticated .bottom-nav { display: flex; }
     </style>
 </head>
 <body>
-    <!-- Lá»P PHá»¦ ÄÄNG NHáº¬P -->
+    <!-- Login Overlay -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <div class="login-icon">
-                <i class="fas fa-lock"></i>
+                <i class="fas fa-robot"></i>
             </div>
-            <h2>ð Báº¢O Máº¬T</h2>
-            <p>Vui lÃ²ng nháº­p máº­t kháº©u Äá» truy cáº­p</p>
-            <input type="password" class="password-input" id="passwordInput" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" autofocus>
-            <button class="login-btn" id="loginBtn"><i class="fas fa-arrow-right-to-bracket" style="margin-right: 8px;"></i>XÃC NHáº¬N</button>
+            <h2 class="login-title">IDECO AI</h2>
+            <p class="login-subtitle">Nhập mật khẩu để truy cập</p>
+            <input type="password" class="password-field" id="passwordInput" placeholder="••••••••" autofocus>
+            <button class="login-button" id="loginBtn">XÁC NHẬN</button>
             <div class="error-message" id="loginError"></div>
         </div>
     </div>
 
-    <!-- GIAO DIá»N CHÃNH -->
-    <header class="mobile-header">
-        <div class="header-left">
-            <div class="header-logo">
-                <i class="fas fa-robot"></i>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="app-title">
+                    <i class="fas fa-robot"></i>
+                    IDECO AI
+                </div>
+                <div class="app-subtitle">Hệ thống công cụ thông minh</div>
+                <div class="user-greeting">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Xin chào, Nguyễn Văn A</span>
+                </div>
             </div>
-            <div class="header-title">
-                <h1>AI BOARD PRO</h1>
-                <p>Há» thá»ng cÃ´ng cá»¥ thÃ´ng minh</p>
-            </div>
-        </div>
-        <div class="header-actions">
-            <a href="#" class="header-btn" id="searchBtn">
+        </header>
+
+        <!-- Search -->
+        <div class="search-container">
+            <div class="search-box">
                 <i class="fas fa-search"></i>
-            </a>
-            <a href="#" class="header-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </a>
+                <input type="text" placeholder="Tìm kiếm công cụ..." id="searchInput">
+            </div>
         </div>
-    </header>
-    
-    <main class="main-content">
-        <section class="hero-section">
-            <h2>ð Há» THá»NG IDECO AI</h2>
-            <p>Tá»ng há»£p 17 cÃ´ng cá»¥ thÃ´ng minh há» trá»£ kho váº­n, kinh doanh vÃ  ÄÃ o táº¡o</p>
-        </section>
-        
-        <div class="tools-grid" id="toolsGrid">
-            <!-- Tools sáº½ ÄÆ°á»£c táº¡o Äá»ng báº±ng JavaScript -->
+
+        <!-- Quick Stats -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalTools">17</div>
+                    <div class="stat-label">Tổng công cụ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="salesCount">8</div>
+                    <div class="stat-label">Kinh doanh</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="inventoryCount">3</div>
+                    <div class="stat-label">Kho vận</div>
+                </div>
+            </div>
         </div>
-    </main>
-    
-    <div class="floating-trigger" id="floatingTrigger">
-        <i class="fas fa-rocket"></i>
+
+        <!-- Categories -->
+        <div class="categories-section">
+            <div class="section-title">
+                <i class="fas fa-th-large"></i>
+                <span>Chuyên đề</span>
+            </div>
+            <div class="categories-grid" id="categoriesGrid">
+                <div class="category-item active" data-category="all">
+                    <div class="category-icon">
+                        <i class="fas fa-grid-2"></i>
+                    </div>
+                    <div class="category-name">Tất cả</div>
+                    <div class="category-count" id="allCount">17</div>
+                </div>
+                <div class="category-item" data-category="sales">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="category-name">Kinh doanh</div>
+                    <div class="category-count" id="salesCount2">8</div>
+                </div>
+                <div class="category-item" data-category="inventory">
+                    <div class="category-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="category-name">Kho vận</div>
+                    <div class="category-count" id="inventoryCount2">3</div>
+                </div>
+                <div class="category-item" data-category="special">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="category-name">Đào tạo & Tiện ích</div>
+                    <div class="category-count" id="specialCount">6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Grid -->
+        <div class="tools-section">
+            <div class="tools-header">
+                <h3 id="categoryTitle">📋 Tất cả công cụ</h3>
+                <span class="tools-count" id="toolsCount">17 công cụ</span>
+            </div>
+            <div class="tools-grid" id="toolsGrid"></div>
+        </div>
     </div>
-    
+
+    <!-- Floating Action Button -->
+    <div class="fab" id="fabButton">
+        <i class="fas-regular fa-layer-group"></i>
+    </div>
+
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
-        <a href="#" class="nav-item active" id="navHome">
+        <a href="#" class="nav-item active" data-nav="home">
             <i class="fas fa-home"></i>
-            <span>Trang chá»§</span>
+            <span>Trang chủ</span>
         </a>
-        <a href="#" class="nav-item" id="navTools">
+        <a href="#" class="nav-item" data-nav="categories">
             <i class="fas fa-th-large"></i>
-            <span>CÃ´ng cá»¥</span>
+            <span>Chuyên đề</span>
         </a>
-        <a href="#" class="nav-item" id="navAI">
-            <i class="fas fa-robot"></i>
-            <span>AI Board</span>
+        <a href="#" class="nav-item" data-nav="favorites">
+            <i class="fas fa-star"></i>
+            <span>Yêu thích</span>
         </a>
-        <a href="#" class="nav-item" id="navProfile">
+        <a href="#" class="nav-item" data-nav="profile">
             <i class="fas fa-user"></i>
-            <span>CÃ¡ nhÃ¢n</span>
+            <span>Cá nhân</span>
         </a>
     </nav>
-    
-    <div class="aib-modal-overlay" id="aibOverlay"></div>
-    
-    <div class="aib-modal-container" id="aibModal">
-        <div class="aib-modal-header">
-            <div class="aib-modal-title">Há» THá»NG IDECO AI</div>
-            <div class="aib-modal-close" id="aibCloseBtn">&times;</div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-container" id="modalContainer">
+        <div class="modal-header">
+            <div class="modal-title">TẤT CẢ CÔNG CỤ</div>
+            <div class="modal-close" id="modalClose">&times;</div>
         </div>
-        
-        <div class="aib-modal-tabs" id="categoryTabs">
-            <div class="aib-tab active" data-category="inventory">ð¦ Kho Váº­n</div>
-            <div class="aib-tab" data-category="sales">ð¨ Kinh Doanh</div>
-            <div class="aib-tab" data-category="special">ð¤ ÄÃ o Táº¡o</div>
-        </div>
-        
-        <div class="aib-modal-content" id="aibContent">
-            <!-- Ná»i dung sáº½ ÄÆ°á»£c táº¡o Äá»ng -->
-        </div>
+        <div class="modal-tools-list" id="modalToolsList"></div>
     </div>
-    
+
     <script>
-        // Dá»® LIá»U CÃNG Cá»¤ (17 TOOLS)
         const aiTools = [
-            { id: 1, title: "Xá»­ lÃ½ Phiáº¿u thuá»c giao FEFO", desc: "Nháº­p liá»u biÃªn báº£n - Kho", url: "https://phantichphieu.netlify.app/", category: "inventory", icon: "ic-1", backup: false },
-            { id: 2, title: "Tá»ng há»£p ÄÆ¡n thuá»c & VAT MISA", desc: "Tá»ng há»£p ÄÆ¡n hÃ ng - HÃ³a ÄÆ¡n VAT", url: "https://lancuoi.netlify.app", category: "inventory", icon: "ic-2", backup: false },
-            { id: 3, title: "Láº­p báº£ng phÃ¢n tÃ­ch P&L - Báº£ng giÃ¡ thuá»c", desc: "PhÃ¢n tÃ­ch chiáº¿t kháº¥u trÃªn ERP", url: "https://phantichbanggia.netlify.app/", category: "inventory", icon: "ic-3", backup: false },
-            { id: 4, title: "Khai bÃ¡o cÃ¡o giao dá»ch khÃ¡ch hÃ ng Má»I AI", desc: "táº¡o APP trÃªn Äiá»n thoáº¡i cho tiá»n giao dá»ch", url: "https://idecokhachhang01.netlify.app/", category: "sales", icon: "ic-4", backup: false },
-            { id: 5, title: "Tá»ng há»£p ÄÆ¡n thuá»c/ngÃ y", desc: "Dá»± bÃ¡o & yÃªu cáº§u Äáº·t hÃ ng", url: "https://dubaodonhang01.netlify.app/", category: "sales", icon: "ic-5", backup: false },
-            { id: 6, title: "Kiá»m tra hÃ³a ÄÆ¡n Sá» lÃ´- Háº¡n DÃ¹ng trong 5 ngÃ y lÆ°u", desc: "Báº£ng website", url: "https://kiemtrahoadon12026.netlify.app", category: "sales", icon: "ic-6", backup: false },
-            { id: 7, title: "Kiá»m Tra GiÃ¡ CNT & Dá»± BÃ¡o", desc: "So sÃ¡nh giÃ¡ chuá»i NhÃ  thuá»c", url: "https://kiemtracnt-dathang.netlify.app/", category: "sales", icon: "ic-7", backup: false },
-            { id: 8, title: "TÃ¬m khÃ¡ch hÃ ng & Tra cá»©u SÄT", desc: "CÃ´ng cá»¥ Sales 01", url: "https://timnpp.netlify.app/", category: "sales", icon: "ic-8", backup: false },
-            { id: 9, title: "Lá»c khÃ¡ch hÃ ng tá»« Link Web", desc: "CÃ´ng cá»¥ Sales 02", url: "https://lockhachhang.netlify.app/", category: "sales", icon: "ic-9", backup: false },
-            { id: 10, title: "Táº¡o Prompt Poster", desc: "Content quáº£ng cÃ¡o tá»± Äá»ng", url: "https://taoprompt2026.netlify.app/", category: "sales", icon: "ic-10", backup: false },
-            { id: 11, title: "Táº¡o áº¢nh & Video AI", desc: "Thiáº¿t káº¿ & Giáº£i trÃ­", url: "https://idecoweb.netlify.app/", category: "sales", icon: "ic-11", backup: false },
+            { id: 1, title: "Xử lý Phiếu thuốc giao FEFO", desc: "Nhập liệu biên bản - Kho", url: "https://phantichphieu.netlify.app/", category: "inventory", icon: "ic-1", backup: false },
+            { id: 2, title: "Tổng hợp đơn thuốc & VAT MISA", desc: "Tổng hợp đơn hàng - Hóa đơn VAT", url: "https://lancuoi.netlify.app", category: "inventory", icon: "ic-2", backup: false },
+            { id: 3, title: "Lập bảng phân tích P&L - Bảng giá thuốc", desc: "Phân tích chiết khấu trên ERP", url: "https://phantichbanggia.netlify.app/", category: "inventory", icon: "ic-3", backup: false },
+            { id: 4, title: "Khai báo cáo giao dịch khách hàng", desc: "Tạo APP trên điện thoại", url: "https://idecokhachhang01.netlify.app/", category: "sales", icon: "ic-4", backup: false },
+            { id: 5, title: "Tổng hợp đơn thuốc/ngày", desc: "Dự báo & yêu cầu đặt hàng", url: "https://dubaodonhang01.netlify.app/", category: "sales", icon: "ic-5", backup: false },
+            { id: 6, title: "Kiểm tra hóa đơn Số lô - Hạn Dùng", desc: "Kiểm tra 5 ngày lưu", url: "https://kiemtrahoadon12026.netlify.app", category: "sales", icon: "ic-6", backup: false },
+            { id: 7, title: "Kiểm Tra Giá CNT & Dự Báo", desc: "So sánh giá chuỗi Nhà thuốc", url: "https://kiemtracnt-dathang.netlify.app/", category: "sales", icon: "ic-7", backup: false },
+            { id: 8, title: "Tìm khách hàng & Tra cứu SĐT", desc: "Công cụ Sales 01", url: "https://timnpp.netlify.app/", category: "sales", icon: "ic-8", backup: false },
+            { id: 9, title: "Lọc khách hàng từ Link Web", desc: "Công cụ Sales 02", url: "https://lockhachhang.netlify.app/", category: "sales", icon: "ic-9", backup: false },
+            { id: 10, title: "Tạo Prompt Poster", desc: "Content quảng cáo tự động", url: "https://taoprompt2026.netlify.app/", category: "sales", icon: "ic-10", backup: false },
+            { id: 11, title: "Tạo Ảnh & Video AI", desc: "Thiết kế & Giải trí", url: "https://idecoweb.netlify.app/", category: "sales", icon: "ic-11", backup: false },
             { id: 12, title: "Capture Video", desc: "Backup System", url: "https://capturevideo.netlify.app/", category: "sales", icon: "ic-12", backup: true },
-            { id: 13, title: "TÆ° Váº¥n Káº¿ toÃ¡n Kho - Voice AI", desc: "Há»i ÄÃ¡p bÃ¡n hÃ ng báº±ng giá»ng nÃ³i", url: "https://trochuyen.netlify.app/", category: "special", icon: "ic-13", backup: false },
-            { id: 14, title: "TÃ¬m hiá»u nghiá»p vá»¥ káº¿ toÃ¡n", desc: "Há»i ÄÃ¡p chuyÃªn mÃ´n nghiá»p vá»¥", url: "https://ketoanideco.netlify.app", category: "special", icon: "ic-14", backup: false },
-            { id: 15, title: "CÄÌt aÌnh", desc: "DuÌng ÄÃªÌ cÄÌt aÌnh laÌ£i theo yÌ muÃ´Ìn", url: "https://scrop-ideco01.netlify.app", category: "special", icon: "ic-15", backup: false },
-            { id: 16, title: "CÄÌt aÌnh - ÄÃ´Ìng nhÃ¢Ìt nhÃ¢n vÃ¢Ì£t by prompt taÌ£o aÌnh", desc: "SÆ°Ì duÌ£ng cÄÌt aÌnh choÌ£n - taÌ£o prompt aÌnh", url: "https://hilarious-palmier-bf2f24.netlify.app/", category: "special", icon: "ic-16", backup: false },
-            { id: 17, title: "Táº¡o Podcast", desc: "Chuyá»n giá»ng nÃ³i thÃ nh vÄn báº£n - táº¡o podcast ", url: "https://thauam-01.netlify.app/", category: "special", icon: "ic-17", backup: false }
+            { id: 13, title: "Tư Vấn Kế toán Kho - Voice AI", desc: "Hỏi đáp bằng giọng nói", url: "https://trochuyen.netlify.app/", category: "special", icon: "ic-13", backup: false },
+            { id: 14, title: "Tìm hiểu nghiệp vụ kế toán", desc: "Hỏi đáp chuyên môn", url: "https://ketoanideco.netlify.app", category: "special", icon: "ic-14", backup: false },
+            { id: 15, title: "Cắt ảnh", desc: "Cắt ảnh theo ý muốn", url: "https://scrop-ideco01.netlify.app", category: "special", icon: "ic-15", backup: false },
+            { id: 16, title: "Cắt ảnh - đồng nhất nhân vật", desc: "Tạo prompt ảnh", url: "https://hilarious-palmier-bf2f24.netlify.app/", category: "special", icon: "ic-16", backup: false },
+            { id: 17, title: "Tạo Podcast", desc: "Chuyển giọng nói thành văn bản", url: "https://thauam-01.netlify.app/", category: "special", icon: "ic-17", backup: false }
         ];
 
         const iconUrls = {
@@ -797,229 +853,213 @@
         };
 
         const categoryNames = {
-            inventory: "ð¦ KHO Váº¬N & Káº¾ TOÃN",
-            sales: "ð¨ KINH DOANH & MKT",
-            special: "ð¤ ÄÃO Táº O & NGHIá»P Vá»¤"
+            all: "📋 Tất cả công cụ",
+            sales: "💼 Kinh doanh & Marketing",
+            inventory: "📦 Kho vận & Kế toán",
+            special: "🎓 Đào tạo & Tiện ích"
         };
 
-        // HÃ m táº¡o grid tools trang chá»§
-        function initToolsGrid() {
-            const toolsGrid = document.getElementById('toolsGrid');
-            if (!toolsGrid) return;
-            toolsGrid.innerHTML = '';
-            aiTools.forEach((tool, index) => {
-                const toolCard = document.createElement('a');
-                toolCard.href = tool.url;
-                toolCard.target = '_blank';
-                toolCard.className = `tool-card category-${tool.category} slide-up`;
-                toolCard.style.animationDelay = `${index * 0.05}s`;
-                toolCard.innerHTML = `
-                    <div class="tool-card-header">
-                        <div class="tool-icon" style="background-image: url('${iconUrls[tool.icon]}')"></div>
-                        <div class="tool-info">
-                            <div class="tool-title">${tool.id}. ${tool.title}</div>
-                            <div class="tool-subtitle">${tool.desc}</div>
-                        </div>
-                    </div>
-                    ${tool.backup ? '<div class="tool-badge">BACKUP</div>' : ''}
-                `;
-                toolsGrid.appendChild(toolCard);
-            });
-        }
-
-        // HÃ m táº¡o ná»i dung modal
-        function initAIBModal() {
-            const aibContent = document.getElementById('aibContent');
-            if (!aibContent) return;
-            aibContent.innerHTML = '';
-            Object.keys(categoryNames).forEach(category => {
-                const categoryTools = aiTools.filter(tool => tool.category === category);
-                if (categoryTools.length > 0) {
-                    const categorySection = document.createElement('div');
-                    categorySection.className = `aib-category-section category-${category}`;
-                    categorySection.id = `category-${category}`;
-                    categorySection.innerHTML = `
-                        <div class="aib-category-header">
-                            <span>${categoryNames[category]}</span>
-                            <span class="category-count">${categoryTools.length}</span>
-                        </div>
-                        <div class="aib-tool-list" id="tool-list-${category}"></div>
-                    `;
-                    aibContent.appendChild(categorySection);
-                    const toolList = document.getElementById(`tool-list-${category}`);
-                    categoryTools.forEach(tool => {
-                        const toolElement = document.createElement('a');
-                        toolElement.href = tool.url;
-                        toolElement.target = '_blank';
-                        toolElement.className = 'aib-modal-tool';
-                        toolElement.innerHTML = `
-                            <span class="aib-modal-tool-number">${tool.id}</span>
-                            <div class="aib-modal-icon" style="background-image: url('${iconUrls[tool.icon]}')"></div>
-                            <div class="aib-modal-tool-info">
-                                <div class="aib-modal-tool-title">${tool.title}</div>
-                                <div class="aib-modal-tool-desc">${tool.desc}</div>
-                            </div>
-                            ${tool.backup ? '<div class="tool-badge">BACKUP</div>' : ''}
-                        `;
-                        toolList.appendChild(toolElement);
-                    });
-                }
-            });
-            // Hiá»n thá» category Äáº§u tiÃªn
-            if (aiTools.length > 0) showCategory(aiTools[0].category);
-        }
-
-        function showCategory(category) {
-            document.querySelectorAll('.aib-category-section').forEach(s => s.style.display = 'none');
-            const activeSection = document.getElementById(`category-${category}`);
-            if (activeSection) activeSection.style.display = 'block';
-            document.querySelectorAll('.aib-tab').forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.getAttribute('data-category') === category) tab.classList.add('active');
-            });
-        }
-
-        // Xá»¬ LÃ ÄÄNG NHáº¬P
+        // Authentication
         const CORRECT_PASSWORD = "ideco@2026";
-        const loginOverlay = document.getElementById('loginOverlay');
-        const passwordInput = document.getElementById('passwordInput');
-        const loginBtn = document.getElementById('loginBtn');
-        const loginError = document.getElementById('loginError');
+        let currentCategory = 'all';
+        let searchTerm = '';
 
         function unlockApp() {
             document.body.classList.add('authenticated');
-            // Khá»i táº¡o láº¡i dá»¯ liá»u
-            initToolsGrid();
-            initAIBModal();
-            // GÃ¡n sá»± kiá»n cho cÃ¡c thÃ nh pháº§n
+            renderTools();
+            updateStats();
             attachEvents();
         }
 
-        function attachEvents() {
-            // MODAL
-            const floatingTrigger = document.getElementById('floatingTrigger');
-            const aibOverlay = document.getElementById('aibOverlay');
-            const aibModal = document.getElementById('aibModal');
-            const aibCloseBtn = document.getElementById('aibCloseBtn');
-            const navAI = document.getElementById('navAI');
-            const navTools = document.getElementById('navTools');
-            const navHome = document.getElementById('navHome');
-            const navProfile = document.getElementById('navProfile');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const searchBtn = document.getElementById('searchBtn');
-            const categoryTabs = document.querySelectorAll('.aib-tab');
+        function renderTools() {
+            const toolsGrid = document.getElementById('toolsGrid');
+            if (!toolsGrid) return;
 
-            function openAIBModal() {
-                if (!document.body.classList.contains('authenticated')) return;
-                aibOverlay.classList.add('active');
-                aibModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            function closeAIBModal() {
-                aibOverlay.classList.remove('active');
-                aibModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-
-            // Floating trigger
-            if (floatingTrigger) floatingTrigger.addEventListener('click', openAIBModal);
+            let filteredTools = aiTools;
             
-            // Nav AI
-            if (navAI) {
-                navAI.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openAIBModal();
-                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                    navAI.classList.add('active');
-                });
+            // Filter by category
+            if (currentCategory !== 'all') {
+                filteredTools = aiTools.filter(tool => tool.category === currentCategory);
+            }
+            
+            // Filter by search
+            if (searchTerm) {
+                filteredTools = filteredTools.filter(tool => 
+                    tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    tool.desc.toLowerCase().includes(searchTerm.toLowerCase())
+                );
             }
 
-            // Close modal
-            if (aibCloseBtn) aibCloseBtn.addEventListener('click', closeAIBModal);
-            if (aibOverlay) aibOverlay.addEventListener('click', closeAIBModal);
+            // Update count
+            document.getElementById('toolsCount').textContent = `${filteredTools.length} công cụ`;
+            document.getElementById('categoryTitle').textContent = categoryNames[currentCategory];
 
-            // Tabs trong modal
-            categoryTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const cat = tab.getAttribute('data-category');
-                    showCategory(cat);
-                });
+            toolsGrid.innerHTML = '';
+            filteredTools.forEach(tool => {
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card';
+                toolCard.innerHTML = `
+                    <div class="tool-icon-wrapper">
+                        <div class="tool-icon" data-url="${tool.url}" style="background-image: url('${iconUrls[tool.icon]}')"></div>
+                        ${tool.backup ? '<span class="tool-backup-badge">BACKUP</span>' : ''}
+                    </div>
+                    <div class="tool-info">
+                        <div class="tool-title">
+                            ${tool.title}
+                            <span class="tool-id">#${tool.id}</span>
+                        </div>
+                        <div class="tool-desc">${tool.desc}</div>
+                        <div class="tool-meta">
+                            <span class="tool-category-tag">
+                                <i class="fas ${getCategoryIcon(tool.category)}"></i>
+                                ${getCategoryName(tool.category)}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                toolsGrid.appendChild(toolCard);
             });
 
-            // Nav Tools: scroll tá»i tools grid
-            if (navTools) {
-                navTools.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.querySelector('.tools-grid').scrollIntoView({ behavior: 'smooth' });
-                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                    navTools.classList.add('active');
+            // Add click events to icons
+            document.querySelectorAll('.tool-icon').forEach(icon => {
+                icon.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.getAttribute('data-url');
+                    if (url) window.open(url, '_blank');
                 });
-            }
-
-            // Nav Home
-            if (navHome) {
-                navHome.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                    navHome.classList.add('active');
-                });
-            }
-
-            // Nav Profile
-            if (navProfile) {
-                navProfile.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    alert('TÃ­nh nÄng Äang phÃ¡t triá»n');
-                });
-            }
-
-            // Mobile menu
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openAIBModal();
-                });
-            }
-
-            // Search
-            if (searchBtn) {
-                searchBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    alert('Nháº­p tá»« khÃ³a Äá» tÃ¬m cÃ´ng cá»¥...');
-                });
-            }
-
-            // ESC close modal
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && aibModal && aibModal.classList.contains('active')) {
-                    closeAIBModal();
-                }
             });
         }
 
-        // Xá»­ lÃ½ ÄÄng nháº­p
-        loginBtn.addEventListener('click', () => {
-            if (passwordInput.value === CORRECT_PASSWORD) {
-                loginError.textContent = '';
+        function getCategoryIcon(category) {
+            switch(category) {
+                case 'sales': return 'fa-chart-line';
+                case 'inventory': return 'fa-box';
+                case 'special': return 'fa-graduation-cap';
+                default: return 'fa-toolbox';
+            }
+        }
+
+        function getCategoryName(category) {
+            switch(category) {
+                case 'sales': return 'Kinh doanh';
+                case 'inventory': return 'Kho vận';
+                case 'special': return 'Đào tạo';
+                default: return 'Khác';
+            }
+        }
+
+        function updateStats() {
+            const salesCount = aiTools.filter(t => t.category === 'sales').length;
+            const inventoryCount = aiTools.filter(t => t.category === 'inventory').length;
+            const specialCount = aiTools.filter(t => t.category === 'special').length;
+
+            document.getElementById('totalTools').textContent = aiTools.length;
+            document.getElementById('salesCount').textContent = salesCount;
+            document.getElementById('inventoryCount').textContent = inventoryCount;
+            document.getElementById('allCount').textContent = aiTools.length;
+            document.getElementById('salesCount2').textContent = salesCount;
+            document.getElementById('inventoryCount2').textContent = inventoryCount;
+            document.getElementById('specialCount').textContent = specialCount;
+        }
+
+        function attachEvents() {
+            // Category selection
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.category-item').forEach(c => c.classList.remove('active'));
+                    item.classList.add('active');
+                    currentCategory = item.getAttribute('data-category');
+                    renderTools();
+                });
+            });
+
+            // Search
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                renderTools();
+            });
+
+            // FAB Modal
+            const fab = document.getElementById('fabButton');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalContainer = document.getElementById('modalContainer');
+            const modalClose = document.getElementById('modalClose');
+            const modalToolsList = document.getElementById('modalToolsList');
+
+            fab.addEventListener('click', () => {
+                modalOverlay.classList.add('active');
+                modalContainer.classList.add('active');
+                
+                // Render all tools in modal
+                modalToolsList.innerHTML = '';
+                aiTools.forEach(tool => {
+                    const toolItem = document.createElement('div');
+                    toolItem.className = `modal-tool-item ${tool.category}`;
+                    toolItem.innerHTML = `
+                        <div class="modal-tool-icon" data-url="${tool.url}" style="background-image: url('${iconUrls[tool.icon]}')"></div>
+                        <div class="tool-info">
+                            <div class="tool-title">${tool.title}</div>
+                            <div class="tool-desc">${tool.desc}</div>
+                        </div>
+                    `;
+                    modalToolsList.appendChild(toolItem);
+                });
+
+                // Add click events to modal icons
+                document.querySelectorAll('.modal-tool-icon').forEach(icon => {
+                    icon.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const url = this.getAttribute('data-url');
+                        if (url) window.open(url, '_blank');
+                    });
+                });
+            });
+
+            modalClose.addEventListener('click', () => {
+                modalOverlay.classList.remove('active');
+                modalContainer.classList.remove('active');
+            });
+
+            modalOverlay.addEventListener('click', () => {
+                modalOverlay.classList.remove('active');
+                modalContainer.classList.remove('active');
+            });
+
+            // Bottom navigation
+            document.querySelectorAll('[data-nav]').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('[data-nav]').forEach(n => n.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    const nav = item.getAttribute('data-nav');
+                    if (nav === 'home') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (nav === 'categories') {
+                        document.querySelector('.categories-section').scrollIntoView({ behavior: 'smooth' });
+                    } else if (nav === 'profile') {
+                        alert('Tính năng đang phát triển');
+                    }
+                });
+            });
+        }
+
+        // Login handlers
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const password = document.getElementById('passwordInput').value;
+            if (password === CORRECT_PASSWORD) {
                 unlockApp();
             } else {
-                loginError.textContent = 'â Máº­t kháº©u khÃ´ng ÄÃºng';
-                passwordInput.value = '';
-                passwordInput.focus();
+                document.getElementById('loginError').textContent = '❌ Mật khẩu không đúng';
+                document.getElementById('passwordInput').value = '';
             }
         });
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') loginBtn.click();
+
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('loginBtn').click();
         });
 
-        // Khá»i táº¡o dá»¯ liá»u trÆ°á»c (sáº½ hiá»n thá» sau ÄÄng nháº­p)
-        window.addEventListener('DOMContentLoaded', () => {
-            initToolsGrid();
-            initAIBModal();
-        });
-
-        // Chá»ng zoom double-tap
+        // Double-tap prevention
         let lastTouchEnd = 0;
         document.addEventListener('touchend', (e) => {
             const now = Date.now();
@@ -1027,6 +1067,5 @@
             lastTouchEnd = now;
         }, false);
     </script>
-  <script type="module" src="/index.tsx"></script>
 </body>
 </html>
