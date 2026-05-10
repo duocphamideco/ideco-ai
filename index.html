@@ -234,6 +234,56 @@ body{
 .lock-error.show{opacity:1;transform:translateY(0)}
 .lock-error::before{content:"⚠";font-size:14px}
 
+/* ===== Remember-me Checkbox ===== */
+.lock-remember{
+  display:flex;align-items:center;gap:10px;
+  margin-top:-2px;padding:4px 2px;
+  cursor:pointer;
+  user-select:none;-webkit-user-select:none;
+  position:relative;
+}
+.lock-remember input{
+  position:absolute;opacity:0;pointer-events:none;
+  width:0;height:0;
+}
+.lock-remember-box{
+  width:20px;height:20px;flex-shrink:0;
+  border:1.5px solid rgba(255,255,255,.22);
+  background:rgba(0,0,0,.28);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s, border-color .2s, box-shadow .2s, transform .15s;
+}
+.lock-remember-box svg{
+  width:13px;height:13px;color:#fff;
+  opacity:0;transform:scale(.5);
+  transition:opacity .2s, transform .2s cubic-bezier(.2,.9,.3,1.4);
+}
+.lock-remember input:checked + .lock-remember-box{
+  background:linear-gradient(135deg,#06b6d4,#2563eb 60%,#7c3aed);
+  border-color:transparent;
+  box-shadow:0 0 0 3px rgba(37,99,235,.18),0 4px 10px -2px rgba(37,99,235,.45);
+}
+.lock-remember input:checked + .lock-remember-box svg{opacity:1;transform:scale(1)}
+.lock-remember input:focus-visible + .lock-remember-box{
+  box-shadow:0 0 0 3px rgba(37,99,235,.35);
+}
+.lock-remember:active .lock-remember-box{transform:scale(.92)}
+.lock-remember-text{
+  font-size:12.5px;font-weight:600;
+  color:rgba(255,255,255,.72);
+  letter-spacing:.2px;
+  line-height:1.35;
+  transition:color .2s;
+}
+.lock-remember:hover .lock-remember-text{color:rgba(255,255,255,.95)}
+.lock-remember-hint{
+  font-size:10px;font-weight:500;
+  color:rgba(255,255,255,.4);
+  margin-top:1px;
+  letter-spacing:.1px;
+}
+
 #lock-submit{
   height:52px;border:none;border-radius:14px;cursor:pointer;
   font:inherit;font-size:14.5px;font-weight:800;letter-spacing:.6px;
@@ -870,6 +920,19 @@ body{
 
       <div class="lock-error" id="lock-error">Mật khẩu không đúng. Vui lòng thử lại.</div>
 
+      <label class="lock-remember" for="lock-remember">
+        <input type="checkbox" id="lock-remember" checked>
+        <span class="lock-remember-box" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </span>
+        <span>
+          <span class="lock-remember-text">Ghi nhớ đăng nhập trên thiết bị này</span>
+          <span class="lock-remember-hint" style="display:block">Lần sau mở app sẽ không cần nhập lại mật khẩu</span>
+        </span>
+      </label>
+
       <button type="submit" id="lock-submit">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -1210,9 +1273,14 @@ const TOOLS = [
 
 /* ============================================================
    AUTH — Mật khẩu obfuscated bằng base64 ('ideco#2026')
+   - SESSION_KEY (sessionStorage): chỉ giữ trong phiên hiện tại
+   - PERSIST_KEY (localStorage):   ghi nhớ qua các lần mở app
+   - REMEMBER_PREF_KEY:             nhớ trạng thái checkbox cho lần sau
    ============================================================ */
 const _PWD_HASH = 'aWRlY28jMjAyNg=='; // base64('ideco#2026')
 const SESSION_KEY = 'ideco_ai_unlocked_v2026';
+const PERSIST_KEY = 'ideco_ai_persist_v2026';
+const REMEMBER_PREF_KEY = 'ideco_ai_remember_pref_v2026';
 const FAV_KEY = 'ideco_ai_favs_v2026';
 
 function checkPassword(input){
@@ -1221,11 +1289,41 @@ function checkPassword(input){
 }
 
 function isUnlocked(){
-  try { return sessionStorage.getItem(SESSION_KEY) === '1'; }
-  catch(e){ return false; }
+  try {
+    if (localStorage.getItem(PERSIST_KEY) === '1') return true;
+    if (sessionStorage.getItem(SESSION_KEY) === '1') return true;
+    return false;
+  } catch(e){ return false; }
 }
-function setUnlocked(v){
-  try { v ? sessionStorage.setItem(SESSION_KEY,'1') : sessionStorage.removeItem(SESSION_KEY); } catch(e){}
+
+function setUnlocked(v, remember){
+  try {
+    if (v) {
+      // Luôn lưu session để app hoạt động trong phiên hiện tại
+      sessionStorage.setItem(SESSION_KEY, '1');
+      // Nếu user tick "Ghi nhớ" → lưu localStorage để lần sau không cần nhập lại
+      if (remember) {
+        localStorage.setItem(PERSIST_KEY, '1');
+        localStorage.setItem(REMEMBER_PREF_KEY, '1');
+      } else {
+        localStorage.removeItem(PERSIST_KEY);
+        localStorage.setItem(REMEMBER_PREF_KEY, '0');
+      }
+    } else {
+      // Khi khoá lại: xoá sạch CẢ session lẫn persist (đảm bảo bảo mật)
+      sessionStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(PERSIST_KEY);
+      // KHÔNG xoá REMEMBER_PREF_KEY — vẫn nhớ user thích checkbox tick hay không
+    }
+  } catch(e){}
+}
+
+function getRememberPref(){
+  try {
+    const v = localStorage.getItem(REMEMBER_PREF_KEY);
+    // Mặc định: true (đã tick) — UX thân thiện cho lần đầu dùng
+    return v !== '0';
+  } catch(e){ return true; }
 }
 
 /* ============================================================
@@ -1408,9 +1506,16 @@ function unlockApp(){
   const app = document.getElementById('app');
   app.classList.add('show');
   app.setAttribute('aria-hidden','false');
-  setUnlocked(true);
+  const remember = document.getElementById('lock-remember').checked;
+  setUnlocked(true, remember);
   render();
   setTimeout(()=>document.getElementById('search-input').blur(), 100);
+  // Nhẹ nhàng thông báo cho user biết trạng thái ghi nhớ
+  if (remember) {
+    setTimeout(()=>showToast('🔓 Đã đăng nhập · Sẽ ghi nhớ thiết bị này', 2200), 350);
+  } else {
+    setTimeout(()=>showToast('🔓 Đăng nhập thành công', 1600), 350);
+  }
 }
 
 function lockApp(){
@@ -1420,6 +1525,8 @@ function lockApp(){
   document.getElementById('lock').classList.remove('hidden');
   document.getElementById('lock').setAttribute('aria-hidden','false');
   document.getElementById('lock-input').value = '';
+  // Khôi phục trạng thái checkbox theo preference đã lưu
+  document.getElementById('lock-remember').checked = getRememberPref();
   closeSheet();
   setTimeout(()=>document.getElementById('lock-input').focus(), 350);
 }
@@ -1578,6 +1685,10 @@ sheetEl.addEventListener('touchend', e => {
    INIT
    ============================================================ */
 (function init(){
+  // Khôi phục trạng thái checkbox "Ghi nhớ" từ preference đã lưu
+  const rememberBox = document.getElementById('lock-remember');
+  if (rememberBox) rememberBox.checked = getRememberPref();
+
   if (isUnlocked()) {
     document.getElementById('lock').classList.add('hidden');
     document.getElementById('lock').setAttribute('aria-hidden','true');
