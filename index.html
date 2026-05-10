@@ -1,1096 +1,1594 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IDECO AI - Chuyên đề</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #7c3aed;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            
-            --bg-main: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-card-alt: #f1f5f9;
-            
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #64748b;
-            
-            --border: #e2e8f0;
-            --border-light: #f1f5f9;
-            
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-            
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 24px;
-            
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-main);
-            color: var(--text-primary);
-            line-height: 1.5;
-        }
-
-        /* Header */
-        .app-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: var(--space-lg) var(--space-md);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 100%);
-            pointer-events: none;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .app-title {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: var(--space-xs);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .app-title i {
-            font-size: 32px;
-            background: rgba(255,255,255,0.2);
-            padding: 8px;
-            border-radius: 16px;
-        }
-
-        .app-subtitle {
-            font-size: 14px;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        .user-greeting {
-            margin-top: var(--space-md);
-            font-size: 16px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .user-greeting i {
-            background: rgba(255,255,255,0.2);
-            padding: 8px;
-            border-radius: 50%;
-            font-size: 14px;
-        }
-
-        /* Search Bar */
-        .search-container {
-            padding: var(--space-md);
-            background: white;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .search-box {
-            background: var(--bg-main);
-            border-radius: 40px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            border: 1px solid var(--border);
-            transition: all 0.2s;
-        }
-
-        .search-box:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-        }
-
-        .search-box i {
-            color: var(--text-muted);
-            font-size: 16px;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            outline: none;
-            font-size: 15px;
-            color: var(--text-primary);
-        }
-
-        .search-box input::placeholder {
-            color: var(--text-muted);
-        }
-
-        /* Categories */
-        .categories-section {
-            padding: var(--space-md);
-        }
-
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: var(--space-md);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .section-title i {
-            color: var(--primary);
-            font-size: 20px;
-        }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-sm);
-            margin-bottom: var(--space-lg);
-        }
-
-        .category-item {
-            background: white;
-            border-radius: var(--radius-lg);
-            padding: var(--space-md) var(--space-sm);
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s;
-            cursor: pointer;
-            border: 1px solid var(--border-light);
-        }
-
-        .category-item.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-color: transparent;
-        }
-
-        .category-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--bg-card-alt);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-sm);
-            font-size: 24px;
-            color: var(--primary);
-            transition: all 0.2s;
-        }
-
-        .category-item.active .category-icon {
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
-
-        .category-name {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .category-count {
-            font-size: 10px;
-            opacity: 0.7;
-            margin-top: 2px;
-        }
-
-        /* Tools Grid */
-        .tools-section {
-            padding: 0 var(--space-md) var(--space-xl);
-        }
-
-        .tools-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-md);
-        }
-
-        .tools-header h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .tools-count {
-            background: var(--bg-card-alt);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-sm);
-        }
-
-        .tool-card {
-            background: white;
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-light);
-            transition: all 0.2s;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--primary);
-        }
-
-        .tool-icon-wrapper {
-            position: relative;
-        }
-
-        .tool-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            background-size: cover;
-            background-position: center;
-            background-color: var(--bg-card-alt);
-            cursor: pointer;
-            transition: transform 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .tool-icon:hover {
-            transform: scale(1.05);
-            border-color: var(--primary);
-        }
-
-        .tool-backup-badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: var(--danger);
-            color: white;
-            font-size: 8px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 10px;
-            border: 2px solid white;
-        }
-
-        .tool-info {
-            flex: 1;
-        }
-
-        .tool-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-        }
-
-        .tool-id {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
-            background: var(--bg-card-alt);
-            padding: 2px 8px;
-            border-radius: 12px;
-        }
-
-        .tool-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-xs);
-        }
-
-        .tool-meta {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .tool-category-tag {
-            background: var(--bg-card-alt);
-            padding: 2px 8px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Quick Stats */
-        .stats-section {
-            padding: 0 var(--space-md) var(--space-md);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-sm);
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: var(--radius-md);
-            padding: var(--space-md);
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-light);
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-            line-height: 1.2;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Floating Action Button */
-        .fab {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 4px 12px rgba(37,99,235,0.4);
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 3px solid white;
-            z-index: 100;
-        }
-
-        .fab:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(37,99,235,0.6);
-        }
-
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0 12px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-            border-top: 1px solid var(--border-light);
-            z-index: 100;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 10px;
-            gap: 4px;
-            flex: 1;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .nav-item i {
-            font-size: 20px;
-        }
-
-        .nav-item.active {
-            color: var(--primary);
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .modal-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
-        .modal-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            padding: var(--space-lg);
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-            z-index: 1001;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-container.active {
-            transform: translateY(0);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-lg);
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .modal-close {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--bg-card-alt);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
-
-        .modal-tools-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-        }
-
-        .modal-tool-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-md);
-            background: var(--bg-card-alt);
-            border-radius: var(--radius-md);
-            border-left: 4px solid transparent;
-        }
-
-        .modal-tool-item.sales { border-left-color: var(--primary); }
-        .modal-tool-item.inventory { border-left-color: var(--success); }
-        .modal-tool-item.special { border-left-color: var(--secondary); }
-
-        .modal-tool-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background-size: cover;
-            background-position: center;
-            cursor: pointer;
-        }
-
-        /* Login Overlay */
-        .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--space-md);
-        }
-
-        .login-card {
-            background: white;
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            width: 100%;
-            max-width: 360px;
-            text-align: center;
-        }
-
-        .login-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-lg);
-            color: white;
-            font-size: 36px;
-        }
-
-        .login-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: var(--space-xs);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .login-subtitle {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: var(--space-lg);
-        }
-
-        .password-field {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid var(--border);
-            border-radius: 40px;
-            font-size: 16px;
-            outline: none;
-            margin-bottom: var(--space-md);
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .password-field:focus {
-            border-color: var(--primary);
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .login-button:active {
-            transform: scale(0.98);
-        }
-
-        .error-message {
-            color: var(--danger);
-            font-size: 13px;
-            margin-top: var(--space-sm);
-            font-weight: 600;
-        }
-
-        /* Utilities */
-        .main-content {
-            padding-bottom: 80px;
-        }
-
-        body:not(.authenticated) .main-content,
-        body:not(.authenticated) .fab,
-        body:not(.authenticated) .bottom-nav {
-            display: none;
-        }
-
-        body.authenticated .login-overlay {
-            display: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b1e33">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AI IDECO">
+<title>AI IDECO · Hệ thống nội bộ 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   AI IDECO MOBILE 2026 — Reset & Tokens
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden}
+:root{
+  --bg:#f5f7fb;
+  --bg-deep:#eef1f7;
+  --panel:#ffffff;
+  --border:#e6eaf2;
+  --text-1:#0b1e33;
+  --text-2:#52637a;
+  --text-3:#7a8aa0;
+  --text-4:#9aa7ba;
+
+  --c-legal:#0a5c9e;       --c-legal-2:#3b82f6;
+  --c-inv:#1d6f42;         --c-inv-2:#22c55e;
+  --c-sales:#8849b5;       --c-sales-2:#ec4899;
+  --c-special:#b45b0f;     --c-special-2:#f59e0b;
+
+  --ai-cyan:#06b6d4;
+  --ai-blue:#2563eb;
+  --ai-violet:#7c3aed;
+  --ai-pink:#ec4899;
+  --red:#b71c1c;
+  --red-soft:#c62828;
+
+  --shadow-1:0 1px 3px rgba(15,30,60,.05),0 1px 2px rgba(15,30,60,.04);
+  --shadow-2:0 8px 24px rgba(15,30,60,.06),0 2px 6px rgba(0,20,40,.03);
+  --shadow-3:0 18px 36px -10px rgba(0,60,120,.18),0 6px 14px rgba(0,0,0,.03);
+  --shadow-glow:0 0 0 1px rgba(37,99,235,.18),0 12px 28px -8px rgba(37,99,235,.28);
+
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bot:env(safe-area-inset-bottom,0px);
+
+  --radius-sm:10px;
+  --radius:14px;
+  --radius-lg:20px;
+  --radius-xl:24px;
+}
+body{
+  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  color:var(--text-1);
+  background:var(--bg);
+  font-size:14px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ============================================================
+   1. LOCK SCREEN — Cinematic gradient + tech grid
+   ============================================================ */
+#lock{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:max(20px,var(--safe-top)) 18px max(20px,var(--safe-bot));
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,.45), transparent 70%),
+    radial-gradient(ellipse 90% 70% at 100% 100%, rgba(37,99,235,.55), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 0% 100%, rgba(6,182,212,.4), transparent 70%),
+    linear-gradient(160deg,#0a1830 0%,#101e3d 50%,#0e1a36 100%);
+  z-index:9999;
+  overflow:hidden;
+  transition:opacity .5s ease, visibility .5s ease;
+}
+#lock.hidden{opacity:0;visibility:hidden;pointer-events:none}
+#lock::before{
+  content:"";position:absolute;inset:-50%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:32px 32px;
+  animation:gridDrift 60s linear infinite;
+  pointer-events:none;
+}
+@keyframes gridDrift{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(32px,32px)}
+}
+#lock::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at center, transparent 30%, rgba(8,15,34,.55) 90%);
+  pointer-events:none;
+}
+
+.lock-card{
+  position:relative;
+  width:100%;max-width:380px;
+  padding:28px 22px 24px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:26px;
+  box-shadow:
+    0 30px 80px -20px rgba(0,0,0,.7),
+    0 0 0 1px rgba(255,255,255,.05) inset,
+    0 1px 0 rgba(255,255,255,.15) inset;
+  z-index:1;
+  animation:lockEnter .6s cubic-bezier(.2,.9,.3,1.1) both;
+}
+@keyframes lockEnter{
+  from{opacity:0;transform:translateY(20px) scale(.96)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.lock-logo{
+  width:74px;height:74px;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:22px;
+  background:linear-gradient(135deg,#06b6d4,#2563eb 50%,#7c3aed);
+  box-shadow:
+    0 14px 36px -6px rgba(37,99,235,.6),
+    0 0 0 1px rgba(255,255,255,.2) inset,
+    0 1px 0 rgba(255,255,255,.3) inset;
+  position:relative;
+}
+.lock-logo svg{width:38px;height:38px;color:#fff}
+.lock-logo::before{
+  content:"";position:absolute;inset:-2px;
+  border-radius:24px;
+  background:linear-gradient(135deg,#06b6d4,#7c3aed);
+  filter:blur(14px);opacity:.5;z-index:-1;
+  animation:logoGlow 2.4s ease-in-out infinite alternate;
+}
+@keyframes logoGlow{
+  from{opacity:.35;transform:scale(.95)}
+  to{opacity:.7;transform:scale(1.05)}
+}
+
+.lock-chip{
+  display:inline-flex;align-items:center;gap:6px;margin:0 auto 10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:1.5px;
+  color:#a7f3d0;
+  background:rgba(34,197,94,.12);
+  border:1px solid rgba(34,197,94,.25);
+  padding:4px 10px;border-radius:50px;
+  text-transform:uppercase;
+}
+.lock-chip-dot{
+  width:6px;height:6px;border-radius:50%;background:#22c55e;
+  box-shadow:0 0 8px #22c55e;
+  animation:lockPulse 1.6s infinite;
+}
+@keyframes lockPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.85)}
+}
+.lock-title{
+  text-align:center;
+  font-size:20px;font-weight:800;letter-spacing:.3px;
+  color:#fff;
+  background:linear-gradient(95deg,#fff 0%, #cbd5ff 60%,#a7f3d0 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:6px;
+  line-height:1.25;
+}
+.lock-sub{
+  text-align:center;
+  font-size:12.5px;font-weight:500;
+  color:rgba(255,255,255,.6);
+  margin-bottom:22px;
+  line-height:1.5;
+}
+.lock-form{display:flex;flex-direction:column;gap:12px}
+
+.lock-input-wrap{
+  position:relative;
+  display:flex;align-items:center;
+  background:rgba(0,0,0,.25);
+  border:1.5px solid rgba(255,255,255,.12);
+  border-radius:14px;
+  padding:0 14px 0 44px;
+  height:52px;
+  transition:border-color .2s, background .2s, box-shadow .2s;
+}
+.lock-input-wrap:focus-within{
+  border-color:rgba(37,99,235,.6);
+  background:rgba(0,0,0,.35);
+  box-shadow:0 0 0 4px rgba(37,99,235,.18);
+}
+.lock-input-wrap::before{
+  content:"";position:absolute;left:14px;top:50%;
+  width:20px;height:20px;transform:translateY(-50%);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2393a4c4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='11' width='18' height='11' rx='2' ry='2'/><path d='M7 11V7a5 5 0 0 1 10 0v4'/></svg>");
+  background-repeat:no-repeat;background-size:contain;
+}
+#lock-input{
+  flex:1;height:100%;
+  background:transparent;border:none;outline:none;
+  font:inherit;font-size:15px;font-weight:600;letter-spacing:1px;
+  color:#fff;
+  caret-color:#60a5fa;
+}
+#lock-input::placeholder{color:rgba(255,255,255,.35);font-weight:500;letter-spacing:.5px}
+#lock-toggle{
+  background:transparent;border:none;cursor:pointer;
+  width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.5);
+  transition:color .2s;
+  flex-shrink:0;
+}
+#lock-toggle:hover, #lock-toggle:focus-visible{color:#fff;outline:none}
+#lock-toggle svg{width:20px;height:20px}
+
+.lock-error{
+  font-size:12.5px;color:#fca5a5;
+  background:rgba(239,68,68,.1);
+  border:1px solid rgba(239,68,68,.25);
+  border-radius:10px;padding:9px 12px;
+  display:flex;align-items:center;gap:8px;
+  opacity:0;transform:translateY(-6px);
+  transition:opacity .25s, transform .25s;
+  pointer-events:none;
+}
+.lock-error.show{opacity:1;transform:translateY(0)}
+.lock-error::before{content:"⚠";font-size:14px}
+
+#lock-submit{
+  height:52px;border:none;border-radius:14px;cursor:pointer;
+  font:inherit;font-size:14.5px;font-weight:800;letter-spacing:.6px;
+  text-transform:uppercase;
+  color:#fff;
+  background:linear-gradient(125deg,#06b6d4 0%,#2563eb 50%,#7c3aed 100%);
+  background-size:200% 200%;background-position:0% 50%;
+  box-shadow:
+    0 10px 24px -6px rgba(37,99,235,.55),
+    0 0 0 1px rgba(255,255,255,.18) inset,
+    0 1px 0 rgba(255,255,255,.25) inset;
+  transition:background-position .5s, transform .15s, box-shadow .25s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+#lock-submit:hover{background-position:100% 50%}
+#lock-submit:active{transform:scale(.98)}
+#lock-submit svg{width:18px;height:18px}
+
+.lock-card.shake{animation:shake .45s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shake{
+  10%,90%{transform:translateX(-2px)}
+  20%,80%{transform:translateX(4px)}
+  30%,50%,70%{transform:translateX(-8px)}
+  40%,60%{transform:translateX(8px)}
+}
+
+.lock-foot{
+  margin-top:18px;text-align:center;
+  font-size:11px;color:rgba(255,255,255,.4);
+  letter-spacing:.4px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.lock-foot b{color:rgba(255,255,255,.65);font-weight:700}
+
+/* ============================================================
+   2. APP SHELL
+   ============================================================ */
+#app{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;
+  background:var(--bg);
+  background-image:
+    radial-gradient(circle at 8% 12%,rgba(37,99,235,.05),transparent 38%),
+    radial-gradient(circle at 92% 88%,rgba(124,58,237,.04),transparent 40%);
+  visibility:hidden;opacity:0;transform:scale(.98);
+  transition:opacity .4s ease .15s, transform .4s ease .15s, visibility .4s ease .15s;
+}
+#app.show{visibility:visible;opacity:1;transform:scale(1)}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:relative;flex-shrink:0;
+  padding:calc(var(--safe-top) + 10px) 14px 12px;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfcff 100%);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 4px 14px -8px rgba(15,30,60,.1);
+  z-index:30;
+}
+.topbar::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(37,99,235,.35) 30%,rgba(124,58,237,.35) 70%,transparent);
+}
+.topbar-row{display:flex;align-items:center;gap:10px}
+
+.brand{
+  display:flex;align-items:center;gap:10px;flex:1;min-width:0;
+}
+.brand-mark{
+  flex-shrink:0;width:38px;height:38px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#06b6d4,#2563eb 50%,#7c3aed);
+  box-shadow:0 6px 14px -4px rgba(37,99,235,.45),0 0 0 1px rgba(255,255,255,.25) inset;
+  color:#fff;
+}
+.brand-mark svg{width:20px;height:20px}
+.brand-text{display:flex;flex-direction:column;min-width:0;line-height:1.15}
+.brand-name{
+  font-size:15px;font-weight:900;letter-spacing:.2px;
+  background:linear-gradient(95deg,#b71c1c 0%,#c62828 30%,#2563eb 65%,#7c3aed 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.brand-sub{
+  font-size:10.5px;font-weight:600;color:var(--text-3);
+  display:flex;align-items:center;gap:5px;margin-top:2px;
+}
+.brand-live{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;font-weight:700;letter-spacing:.8px;
+  color:#15803d;background:#dcfce7;
+  padding:1px 6px;border-radius:30px;
+  border:1px solid #86efac;
+  text-transform:uppercase;
+}
+.brand-live-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:#22c55e;box-shadow:0 0 6px #22c55e;
+  animation:livePulse 1.6s infinite;
+}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.icon-btn{
+  flex-shrink:0;width:38px;height:38px;border:none;cursor:pointer;
+  background:#f1f4f9;color:var(--text-2);
+  border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);
+  transition:background .2s,color .2s,transform .15s,box-shadow .2s;
+}
+.icon-btn:hover{background:#e6eaf2;color:var(--text-1)}
+.icon-btn:active{transform:scale(.94)}
+.icon-btn svg{width:18px;height:18px}
+.icon-btn.primary{
+  color:#fff;border:1px solid rgba(255,255,255,.25);
+  background:linear-gradient(125deg,#06b6d4,#2563eb 55%,#7c3aed);
+  box-shadow:0 6px 14px -4px rgba(37,99,235,.45),0 0 0 1px rgba(255,255,255,.18) inset;
+}
+.icon-btn.primary:hover{background:linear-gradient(125deg,#0891b2,#1d4ed8 55%,#6d28d9)}
+
+/* ===== SEARCH BAR ===== */
+.searchbar{
+  margin-top:10px;position:relative;
+  display:flex;align-items:center;
+  background:#f1f4f9;border:1.5px solid transparent;
+  border-radius:12px;height:42px;
+  padding:0 14px 0 38px;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.searchbar:focus-within{
+  background:#fff;border-color:var(--ai-blue);
+  box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+.searchbar::before{
+  content:"";position:absolute;left:12px;top:50%;
+  width:18px;height:18px;transform:translateY(-50%);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a8aa0' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='M21 21l-4.3-4.3'/></svg>");
+  background-repeat:no-repeat;background-size:contain;
+  pointer-events:none;
+}
+#search-input{
+  flex:1;height:100%;
+  background:transparent;border:none;outline:none;
+  font:inherit;font-size:14px;font-weight:500;
+  color:var(--text-1);
+}
+#search-input::placeholder{color:var(--text-3);font-weight:500}
+#search-clear{
+  display:none;background:transparent;border:none;cursor:pointer;
+  width:24px;height:24px;border-radius:50%;color:#fff;
+  background:#cbd5e1;font-size:14px;line-height:1;
+  align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+#search-clear.show{display:flex}
+#search-clear:hover{background:#94a3b8}
+
+/* ===== TABS ===== */
+.tabs{
+  flex-shrink:0;
+  display:flex;gap:6px;
+  padding:10px 12px 12px;
+  overflow-x:auto;
+  background:linear-gradient(180deg,#ffffff,#f8faff);
+  border-bottom:1px solid var(--border);
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+  z-index:25;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;scroll-snap-align:start;
+  display:inline-flex;align-items:center;gap:7px;
+  height:38px;padding:0 13px;
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:50px;
+  font:inherit;font-size:12.5px;font-weight:700;letter-spacing:.2px;
+  color:var(--text-2);
+  cursor:pointer;
+  transition:all .2s ease;
+  white-space:nowrap;
+  position:relative;
+}
+.tab:active{transform:scale(.96)}
+.tab .tab-emoji{font-size:14px}
+.tab .tab-count{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;font-weight:800;
+  background:#eef1f7;color:var(--text-2);
+  padding:2px 7px;border-radius:30px;
+  margin-left:1px;
+}
+.tab.active{
+  color:#fff;border-color:transparent;
+  box-shadow:0 6px 16px -4px rgba(15,30,60,.25);
+}
+.tab.active .tab-count{background:rgba(255,255,255,.25);color:#fff}
+.tab[data-cat="legal"].active{background:linear-gradient(135deg,var(--c-legal),var(--c-legal-2))}
+.tab[data-cat="inv"].active{background:linear-gradient(135deg,var(--c-inv),var(--c-inv-2))}
+.tab[data-cat="sales"].active{background:linear-gradient(135deg,var(--c-sales),var(--c-sales-2))}
+.tab[data-cat="special"].active{background:linear-gradient(135deg,var(--c-special),var(--c-special-2))}
+.tab[data-cat="favorites"].active{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+
+/* ===== CONTENT AREA ===== */
+.content{
+  flex:1;min-height:0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:14px 12px calc(20px + var(--safe-bot));
+  scrollbar-width:thin;
+  scrollbar-color:#cbd5e1 transparent;
+}
+.content::-webkit-scrollbar{width:6px}
+.content::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px}
+
+.section-head{
+  display:flex;align-items:center;gap:10px;
+  padding:6px 4px 12px;
+  position:sticky;top:0;
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 75%,transparent 100%);
+  z-index:5;
+}
+.section-icon{
+  flex-shrink:0;width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;font-size:16px;color:#fff;
+  box-shadow:0 4px 10px rgba(15,30,60,.12),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.section-icon[data-cat="legal"]{background:linear-gradient(135deg,var(--c-legal),var(--c-legal-2))}
+.section-icon[data-cat="inv"]{background:linear-gradient(135deg,var(--c-inv),var(--c-inv-2))}
+.section-icon[data-cat="sales"]{background:linear-gradient(135deg,var(--c-sales),var(--c-sales-2))}
+.section-icon[data-cat="special"]{background:linear-gradient(135deg,var(--c-special),var(--c-special-2))}
+.section-icon[data-cat="favorites"]{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.section-meta{flex:1;min-width:0;line-height:1.2}
+.section-name{
+  font-size:13px;font-weight:800;letter-spacing:.3px;
+  text-transform:uppercase;
+}
+.section-name[data-cat="legal"]{color:var(--c-legal)}
+.section-name[data-cat="inv"]{color:var(--c-inv)}
+.section-name[data-cat="sales"]{color:var(--c-sales)}
+.section-name[data-cat="special"]{color:var(--c-special)}
+.section-name[data-cat="favorites"]{color:#ef4444}
+.section-desc{
+  font-size:11px;font-weight:500;color:var(--text-3);
+  margin-top:2px;line-height:1.4;
+}
+.section-badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:800;color:var(--text-1);
+  background:linear-gradient(135deg,#eef2ff,#f5f3ff);
+  border:1px solid rgba(99,102,241,.18);
+  padding:3px 9px;border-radius:30px;
+  flex-shrink:0;
+}
+
+/* ===== CARD GRID ===== */
+.cards{display:grid;gap:10px;grid-template-columns:1fr}
+@media (min-width:520px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:820px){.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1180px){.cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+.card{
+  position:relative;
+  display:flex;align-items:flex-start;gap:11px;
+  padding:12px 12px 12px 11px;
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-1);
+  text-decoration:none;color:inherit;
+  transition:transform .15s,box-shadow .2s,border-color .2s,background .2s;
+  overflow:hidden;
+  -webkit-user-select:none;user-select:none;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--cat-1),var(--cat-2));
+  border-radius:0 4px 4px 0;
+  opacity:.85;
+}
+.card[data-cat="legal"]   {--cat-1:var(--c-legal);  --cat-2:var(--c-legal-2)}
+.card[data-cat="inv"]     {--cat-1:var(--c-inv);    --cat-2:var(--c-inv-2)}
+.card[data-cat="sales"]   {--cat-1:var(--c-sales);  --cat-2:var(--c-sales-2)}
+.card[data-cat="special"] {--cat-1:var(--c-special);--cat-2:var(--c-special-2)}
+.card:active{transform:scale(.985);box-shadow:var(--shadow-3)}
+@media (hover:hover){
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-3);border-color:transparent}
+  .card[data-cat="legal"]:hover{background:#f3f9ff}
+  .card[data-cat="inv"]:hover{background:#f1f9f0}
+  .card[data-cat="sales"]:hover{background:#faf2fe}
+  .card[data-cat="special"]:hover{background:#fff6e5}
+}
+.card-icon{
+  flex-shrink:0;width:42px;height:42px;border-radius:12px;
+  background-size:cover;background-position:center;
+  background-color:#f1f4f9;
+  border:1px solid #f0f3f7;
+  box-shadow:0 4px 10px rgba(0,0,0,.06);
+  position:relative;
+}
+.card-icon::after{
+  content:"";position:absolute;inset:0;border-radius:12px;
+  background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.08));
+  pointer-events:none;
+}
+.card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.card-title{
+  font-size:12.5px;font-weight:700;line-height:1.4;
+  color:var(--text-1);letter-spacing:.1px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;
+  word-break:break-word;
+  overflow-wrap:anywhere;
+}
+.card-sub{
+  font-size:10.5px;font-weight:500;color:var(--text-2);
+  line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;
+  word-break:break-word;
+  overflow-wrap:anywhere;
+}
+.card-tag{
+  display:inline-flex;align-items:center;gap:4px;align-self:flex-start;
+  font-size:9px;font-weight:800;letter-spacing:.4px;
+  text-transform:uppercase;
+  padding:3px 8px;border-radius:30px;
+  margin-top:1px;
+  white-space:normal;line-height:1.3;
+  max-width:100%;
+}
+.card-tag.tag-backup{
+  color:#b34a4a;background:#ffe9e9;border:1px solid #fccaca;
+}
+.card-tag.tag-tip{
+  color:#0369a1;background:#e0f2fe;border:1px solid #bae6fd;
+}
+.card-tag.tag-erp{
+  color:#7c2d12;background:#fff7ed;border:1px solid #fed7aa;
+}
+
+.card-fav{
+  position:absolute;top:8px;right:8px;
+  width:28px;height:28px;border:none;cursor:pointer;
+  background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  color:#cbd5e1;
+  border-radius:50%;
+  transition:color .2s, background .2s, transform .15s;
+  z-index:2;
+}
+.card-fav:hover{background:rgba(255,193,7,.12);color:#f59e0b}
+.card-fav:active{transform:scale(.85)}
+.card-fav.active{color:#f59e0b}
+.card-fav.active::before{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:rgba(245,158,11,.15);
+  animation:favPop .35s ease;
+}
+@keyframes favPop{
+  0%{transform:scale(.5);opacity:1}
+  100%{transform:scale(2);opacity:0}
+}
+.card-fav svg{width:18px;height:18px}
+
+.card-arrow{
+  position:absolute;right:10px;bottom:10px;
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:#cbd5e1;
+  opacity:.6;transition:opacity .2s, color .2s, transform .2s;
+  pointer-events:none;
+}
+.card-arrow svg{width:14px;height:14px}
+.card:hover .card-arrow,.card:active .card-arrow{
+  opacity:1;transform:translateX(2px);
+}
+.card[data-cat="legal"]:hover .card-arrow{color:var(--c-legal)}
+.card[data-cat="inv"]:hover .card-arrow{color:var(--c-inv)}
+.card[data-cat="sales"]:hover .card-arrow{color:var(--c-sales)}
+.card[data-cat="special"]:hover .card-arrow{color:var(--c-special)}
+
+.card-pos{position:relative}
+
+/* ===== EMPTY ===== */
+.empty{
+  text-align:center;padding:60px 20px 40px;
+  color:var(--text-3);
+}
+.empty-emoji{font-size:48px;margin-bottom:10px;opacity:.7}
+.empty-title{font-size:15px;font-weight:700;color:var(--text-2);margin-bottom:4px}
+.empty-sub{font-size:13px;line-height:1.5}
+
+/* ===== ALL CATEGORIES VIEW (when not searching/filtering) ===== */
+.section{margin-bottom:18px}
+.section:last-child{margin-bottom:0}
+
+/* ============================================================
+   3. QR MODAL
+   ============================================================ */
+.qr-overlay{
+  position:fixed;inset:0;
+  background:rgba(7,14,30,.6);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  z-index:9000;
+  display:none;align-items:center;justify-content:center;
+  padding:max(20px,var(--safe-top)) 16px max(20px,var(--safe-bot));
+  overflow-y:auto;
+  opacity:0;transition:opacity .25s ease;
+}
+.qr-overlay.show{display:flex;opacity:1}
+.qr-popup{
+  position:relative;width:100%;max-width:340px;
+  background:#fff;border-radius:22px;overflow:hidden;
+  opacity:0;transform:scale(.92);
+  transition:opacity .25s, transform .3s cubic-bezier(.2,.9,.3,1);
+  box-shadow:0 30px 70px -10px rgba(0,30,80,.5),0 0 80px rgba(37,99,235,.25);
+  display:flex;flex-direction:column;
+  margin:auto;
+}
+.qr-overlay.show .qr-popup{opacity:1;transform:scale(1)}
+.qr-head{
+  padding:14px 16px 12px;color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(125deg,#06b6d4 0%,#2563eb 55%,#7c3aed 100%);
+}
+.qr-head::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:18px 18px;opacity:.6;
+}
+.qr-title{
+  position:relative;display:flex;align-items:center;gap:10px;
+  font-size:13.5px;font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;
+}
+.qr-title svg{width:20px;height:20px;flex-shrink:0}
+.qr-sub{
+  position:relative;margin-top:4px;
+  font-size:11.5px;font-weight:500;color:rgba(255,255,255,.85);
+}
+.qr-close{
+  position:absolute;top:12px;right:12px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-size:20px;line-height:1;font-weight:300;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  z-index:1;transition:.2s;
+}
+.qr-close:hover{background:rgba(255,255,255,.35);transform:rotate(90deg)}
+.qr-body{
+  padding:18px 18px 20px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  background:radial-gradient(circle at top,rgba(37,99,235,.05),transparent 60%),#fff;
+}
+.qr-frame{
+  position:relative;padding:10px;background:#fff;border-radius:14px;
+  box-shadow:0 0 0 1px var(--border),0 8px 24px -8px rgba(15,30,60,.18);
+}
+.qr-frame::before,.qr-frame::after{
+  content:"";position:absolute;width:20px;height:20px;
+  border:3px solid var(--ai-blue);
+}
+.qr-frame::before{
+  top:-4px;left:-4px;
+  border-right:none;border-bottom:none;border-top-left-radius:8px;
+}
+.qr-frame::after{
+  bottom:-4px;right:-4px;
+  border-left:none;border-top:none;border-bottom-right-radius:8px;
+}
+.qr-corner-tr,.qr-corner-bl{
+  position:absolute;width:20px;height:20px;
+  border:3px solid var(--ai-violet);
+}
+.qr-corner-tr{
+  top:-4px;right:-4px;
+  border-left:none;border-bottom:none;border-top-right-radius:8px;
+}
+.qr-corner-bl{
+  bottom:-4px;left:-4px;
+  border-right:none;border-top:none;border-bottom-left-radius:8px;
+}
+.qr-img{
+  display:block;width:200px;height:200px;
+  max-width:60vw;max-height:60vw;
+  object-fit:contain;border-radius:4px;
+}
+.qr-tip{
+  font-size:12px;color:var(--text-2);text-align:center;
+  line-height:1.5;max-width:280px;
+}
+.qr-tip b{color:var(--ai-blue);font-weight:700}
+
+/* ============================================================
+   4. MENU SHEET (bottom sheet)
+   ============================================================ */
+.sheet-overlay{
+  position:fixed;inset:0;background:rgba(7,14,30,.45);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  z-index:8500;
+  display:none;opacity:0;
+  transition:opacity .25s;
+}
+.sheet-overlay.show{display:block;opacity:1}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;
+  background:#fff;
+  border-radius:22px 22px 0 0;
+  padding:8px 14px calc(20px + var(--safe-bot));
+  z-index:8501;
+  transform:translateY(100%);
+  transition:transform .3s cubic-bezier(.2,.9,.3,1);
+  box-shadow:0 -10px 40px rgba(0,0,0,.18);
+  max-width:480px;margin:0 auto;
+}
+.sheet.show{transform:translateY(0)}
+.sheet-handle{
+  width:42px;height:4px;background:#cbd5e1;border-radius:4px;
+  margin:8px auto 12px;
+}
+.sheet-title{
+  font-size:14px;font-weight:800;
+  color:var(--text-2);text-transform:uppercase;
+  letter-spacing:.5px;
+  padding:0 4px 8px;
+}
+.sheet-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 12px;
+  background:transparent;border:none;cursor:pointer;
+  width:100%;font:inherit;text-align:left;
+  border-radius:12px;
+  color:var(--text-1);
+  transition:background .15s;
+}
+.sheet-item:active{background:#f1f4f9}
+.sheet-item-icon{
+  flex-shrink:0;width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+}
+.sheet-item-icon svg{width:18px;height:18px}
+.sheet-item.qr .sheet-item-icon{background:linear-gradient(135deg,#06b6d4,#7c3aed)}
+.sheet-item.about .sheet-item-icon{background:linear-gradient(135deg,#10b981,#059669)}
+.sheet-item.lock-out .sheet-item-icon{background:linear-gradient(135deg,#b71c1c,#7f1d1d)}
+.sheet-item-text{flex:1;min-width:0}
+.sheet-item-name{font-size:14px;font-weight:700;line-height:1.2}
+.sheet-item-desc{font-size:11.5px;font-weight:500;color:var(--text-3);margin-top:2px;line-height:1.3}
+
+/* ============================================================
+   5. TOAST
+   ============================================================ */
+.toast{
+  position:fixed;bottom:calc(20px + var(--safe-bot));left:50%;
+  transform:translateX(-50%) translateY(60px);
+  background:#0b1e33;color:#fff;
+  font-size:13px;font-weight:600;
+  padding:10px 18px;border-radius:50px;
+  box-shadow:0 14px 30px -6px rgba(0,0,0,.3);
+  z-index:9500;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s, transform .25s;
+  display:flex;align-items:center;gap:8px;
+  white-space:nowrap;max-width:90vw;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{width:16px;height:16px;flex-shrink:0}
+
+/* ============================================================
+   6. RESPONSIVE TWEAKS
+   ============================================================ */
+@media (max-width:380px){
+  .brand-name{font-size:14px}
+  .brand-sub{font-size:9.5px}
+  .topbar{padding-left:10px;padding-right:10px}
+  .icon-btn{width:36px;height:36px}
+  .tab{height:36px;padding:0 11px;font-size:12px}
+}
+
+/* Bigger touch targets on touch devices */
+@media (pointer:coarse){
+  .card-fav{width:34px;height:34px;top:6px;right:6px}
+  .card-fav svg{width:20px;height:20px}
+}
+</style>
 </head>
 <body>
-    <!-- Login Overlay -->
-    <div class="login-overlay" id="loginOverlay">
-        <div class="login-card">
-            <div class="login-icon">
-                <i class="fas fa-robot"></i>
-            </div>
-            <h2 class="login-title">IDECO AI</h2>
-            <p class="login-subtitle">Nhập mật khẩu để truy cập</p>
-            <input type="password" class="password-field" id="passwordInput" placeholder="••••••••" autofocus>
-            <button class="login-button" id="loginBtn">XÁC NHẬN</button>
-            <div class="error-message" id="loginError"></div>
-        </div>
+
+<!-- ============================================================
+     LOCK SCREEN
+     ============================================================ -->
+<div id="lock" aria-hidden="false">
+  <form class="lock-card" id="lock-card" autocomplete="off">
+    <div class="lock-logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </div>
+    <div style="text-align:center">
+      <span class="lock-chip"><span class="lock-chip-dot"></span> SECURE · INTERNAL</span>
+    </div>
+    <h1 class="lock-title">HỆ THỐNG AI · IDECO</h1>
+    <p class="lock-sub">Vui lòng nhập mật khẩu nội bộ để truy cập <br>bảng điều khiển công cụ AI 2026</p>
+
+    <div class="lock-form">
+      <label class="lock-input-wrap">
+        <input
+          id="lock-input"
+          type="password"
+          placeholder="Mật khẩu truy cập"
+          autocomplete="off"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          inputmode="text"
+          required>
+        <button type="button" id="lock-toggle" aria-label="Hiện/ẩn mật khẩu">
+          <svg id="eye-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <svg id="eye-hide" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.94 17.94A10.06 10.06 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+          </svg>
+        </button>
+      </label>
+
+      <div class="lock-error" id="lock-error">Mật khẩu không đúng. Vui lòng thử lại.</div>
+
+      <button type="submit" id="lock-submit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+        </svg>
+        MỞ KHÓA HỆ THỐNG
+      </button>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-content">
-                <div class="app-title">
-                    <i class="fas fa-robot"></i>
-                    IDECO AI
-                </div>
-                <div class="app-subtitle">Hệ thống công cụ thông minh</div>
-                <div class="user-greeting">
-                    <i class="fas fa-user-circle"></i>
-                    <span>Xin chào, Nguyễn Văn A</span>
-                </div>
-            </div>
-        </header>
+    <div class="lock-foot">
+      <div><b>Ứng dụng độc quyền IDECO</b> · Anh Triết — CEO lập trình</div>
+      <div>© 2026 · Internal Use Only</div>
+    </div>
+  </form>
+</div>
 
-        <!-- Search -->
-        <div class="search-container">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Tìm kiếm công cụ..." id="searchInput">
-            </div>
-        </div>
+<!-- ============================================================
+     APP SHELL
+     ============================================================ -->
+<div id="app" role="application" aria-hidden="true">
 
-        <!-- Quick Stats -->
-        <div class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value" id="totalTools">17</div>
-                    <div class="stat-label">Tổng công cụ</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="salesCount">8</div>
-                    <div class="stat-label">Kinh doanh</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="inventoryCount">3</div>
-                    <div class="stat-label">Kho vận</div>
-                </div>
-            </div>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-row">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 L4 7 L4 17 L12 22 L20 17 L20 7 Z"></path>
+            <path d="M12 2 L12 22"></path>
+            <path d="M4 7 L20 17"></path>
+            <path d="M20 7 L4 17"></path>
+          </svg>
         </div>
-
-        <!-- Categories -->
-        <div class="categories-section">
-            <div class="section-title">
-                <i class="fas fa-th-large"></i>
-                <span>Chuyên đề</span>
-            </div>
-            <div class="categories-grid" id="categoriesGrid">
-                <div class="category-item active" data-category="all">
-                    <div class="category-icon">
-                        <i class="fas fa-grid-2"></i>
-                    </div>
-                    <div class="category-name">Tất cả</div>
-                    <div class="category-count" id="allCount">17</div>
-                </div>
-                <div class="category-item" data-category="sales">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="category-name">Kinh doanh</div>
-                    <div class="category-count" id="salesCount2">8</div>
-                </div>
-                <div class="category-item" data-category="inventory">
-                    <div class="category-icon">
-                        <i class="fas fa-box"></i>
-                    </div>
-                    <div class="category-name">Kho vận</div>
-                    <div class="category-count" id="inventoryCount2">3</div>
-                </div>
-                <div class="category-item" data-category="special">
-                    <div class="category-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="category-name">Đào tạo & Tiện ích</div>
-                    <div class="category-count" id="specialCount">6</div>
-                </div>
-            </div>
+        <div class="brand-text">
+          <div class="brand-name">AI IDECO · 2026</div>
+          <div class="brand-sub">
+            <span class="brand-live"><span class="brand-live-dot"></span>LIVE</span>
+            <span>Bảng điều khiển nội bộ</span>
+          </div>
         </div>
-
-        <!-- Tools Grid -->
-        <div class="tools-section">
-            <div class="tools-header">
-                <h3 id="categoryTitle">📋 Tất cả công cụ</h3>
-                <span class="tools-count" id="toolsCount">17 công cụ</span>
-            </div>
-            <div class="tools-grid" id="toolsGrid"></div>
-        </div>
+      </div>
+      <button class="icon-btn primary" id="qr-btn" aria-label="Hiển thị mã QR">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm9-2h3v3h-3v-3zm0 5h3v3h-3v-3zm5-5h2v3h-2v-3zm0 5h2v3h-2v-3z"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="menu-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="5" r="1.6" fill="currentColor"></circle>
+          <circle cx="12" cy="12" r="1.6" fill="currentColor"></circle>
+          <circle cx="12" cy="19" r="1.6" fill="currentColor"></circle>
+        </svg>
+      </button>
     </div>
 
-    <!-- Floating Action Button -->
-    <div class="fab" id="fabButton">
-        <i class="fas-regular fa-layer-group"></i>
+    <!-- SEARCH -->
+    <div class="searchbar">
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Tìm công cụ AI… (vd: hợp đồng, hóa đơn, kho)"
+        autocomplete="off"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false">
+      <button id="search-clear" aria-label="Xóa tìm kiếm">×</button>
     </div>
+  </header>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active" data-nav="home">
-            <i class="fas fa-home"></i>
-            <span>Trang chủ</span>
-        </a>
-        <a href="#" class="nav-item" data-nav="categories">
-            <i class="fas fa-th-large"></i>
-            <span>Chuyên đề</span>
-        </a>
-        <a href="#" class="nav-item" data-nav="favorites">
-            <i class="fas fa-star"></i>
-            <span>Yêu thích</span>
-        </a>
-        <a href="#" class="nav-item" data-nav="profile">
-            <i class="fas fa-user"></i>
-            <span>Cá nhân</span>
-        </a>
-    </nav>
+  <!-- TABS -->
+  <nav class="tabs" id="tabs" aria-label="Phân loại công cụ">
+    <button class="tab active" data-cat="all">
+      <span class="tab-emoji">🌐</span>
+      <span>Tất cả</span>
+      <span class="tab-count" data-count="all">0</span>
+    </button>
+    <button class="tab" data-cat="favorites">
+      <span class="tab-emoji">⭐</span>
+      <span>Yêu thích</span>
+      <span class="tab-count" data-count="favorites">0</span>
+    </button>
+    <button class="tab" data-cat="legal">
+      <span class="tab-emoji">⚖️</span>
+      <span>Pháp lý</span>
+      <span class="tab-count" data-count="legal">0</span>
+    </button>
+    <button class="tab" data-cat="inv">
+      <span class="tab-emoji">📦</span>
+      <span>Kho · Kế toán</span>
+      <span class="tab-count" data-count="inv">0</span>
+    </button>
+    <button class="tab" data-cat="sales">
+      <span class="tab-emoji">🎨</span>
+      <span>Kinh doanh</span>
+      <span class="tab-count" data-count="sales">0</span>
+    </button>
+    <button class="tab" data-cat="special">
+      <span class="tab-emoji">🤖</span>
+      <span>Đào tạo</span>
+      <span class="tab-count" data-count="special">0</span>
+    </button>
+  </nav>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modalOverlay"></div>
-    <div class="modal-container" id="modalContainer">
-        <div class="modal-header">
-            <div class="modal-title">TẤT CẢ CÔNG CỤ</div>
-            <div class="modal-close" id="modalClose">&times;</div>
-        </div>
-        <div class="modal-tools-list" id="modalToolsList"></div>
+  <!-- CONTENT -->
+  <main class="content" id="content"></main>
+</div>
+
+<!-- ============================================================
+     QR MODAL
+     ============================================================ -->
+<div class="qr-overlay" id="qr-overlay" role="dialog" aria-modal="true" aria-labelledby="qr-title">
+  <div class="qr-popup">
+    <div class="qr-head">
+      <div class="qr-title" id="qr-title">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm9-2h3v3h-3v-3zm0 5h3v3h-3v-3zm5-5h2v3h-2v-3zm0 5h2v3h-2v-3z"/>
+        </svg>
+        <span>QR CODE XEM TRÊN MOBILE</span>
+      </div>
+      <div class="qr-sub">Quét mã để mở hệ thống AI IDECO trên điện thoại</div>
+      <button class="qr-close" id="qr-close" aria-label="Đóng">&times;</button>
     </div>
+    <div class="qr-body">
+      <div class="qr-frame">
+        <span class="qr-corner-tr" aria-hidden="true"></span>
+        <span class="qr-corner-bl" aria-hidden="true"></span>
+        <img class="qr-img" src="https://cdn.imgpile.com/f/nS7SUul_xl.jpg" alt="QR Code IDECO AI" loading="lazy">
+      </div>
+      <p class="qr-tip">Mở <b>Camera</b> hoặc app quét mã trên điện thoại,<br>hướng vào mã QR ở trên để truy cập nhanh.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MENU BOTTOM SHEET
+     ============================================================ -->
+<div class="sheet-overlay" id="sheet-overlay"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Tùy chọn</div>
+  <button class="sheet-item qr" id="menu-qr">
+    <div class="sheet-item-icon">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h7v7H3V3zm2 2v3h3V5H5zm9-2h7v7h-7V3zm2 2v3h3V5h-3zM3 14h7v7H3v-7zm2 2v3h3v-3H5zm9-2h3v3h-3v-3zm0 5h3v3h-3v-3zm5-5h2v3h-2v-3zm0 5h2v3h-2v-3z"/></svg>
+    </div>
+    <div class="sheet-item-text">
+      <div class="sheet-item-name">QR Code xem trên điện thoại</div>
+      <div class="sheet-item-desc">Quét nhanh để mở app trên mobile khác</div>
+    </div>
+  </button>
+  <button class="sheet-item about" id="menu-about">
+    <div class="sheet-item-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+    </div>
+    <div class="sheet-item-text">
+      <div class="sheet-item-name">Giới thiệu hệ thống</div>
+      <div class="sheet-item-desc">AI IDECO 2026 · Tự hào chuyển đổi số</div>
+    </div>
+  </button>
+  <button class="sheet-item lock-out" id="menu-lock">
+    <div class="sheet-item-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+        <polyline points="16 17 21 12 16 7"></polyline>
+        <line x1="21" y1="12" x2="9" y2="12"></line>
+      </svg>
+    </div>
+    <div class="sheet-item-text">
+      <div class="sheet-item-name">Khóa lại hệ thống</div>
+      <div class="sheet-item-desc">Yêu cầu nhập mật khẩu lần sau</div>
+    </div>
+  </button>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status"></div>
 
 <script>
-        const aiTools = [
-            { id: 1, title: "IDECO PHÁP LÝ - SOẠN HD-VĂN BẢN", desc: "Tư vấn pháp lý", url: "https://ideco-phaply.netlify.app/", category: "sales", icon: "ic-1", backup: false },
-            { id: 2, title: "Xử lý Phiếu thuốc giao FEFO", desc: "Nhập liệu biên bản - Kho", url: "https://phantichphieu.netlify.app/", category: "inventory", icon: "ic-2", backup: false },
-            { id: 3, title: "Tổng hợp đơn thuốc & VAT MISA", desc: "Tổng hợp đơn hàng - Hóa đơn VAT", url: "https://lancuoi.netlify.app", category: "inventory", icon: "ic-3", backup: false },
-            { id: 4, title: "Lập bảng phân tích P&L - Bảng giá thuốc", desc: "Phân tích chiết khấu trên ERP", url: "https://phantichbanggia.netlify.app/", category: "inventory", icon: "ic-4", backup: false },
-            { id: 5, title: "KHAI BÁO CÁO GIAO DỊCH KH", desc: "Tạo APP trên điện thoại", url: "https://idecokhachhang3.netlify.app/", category: "sales", icon: "ic-5", backup: false },
-            { id: 6, title: "Tổng hợp đơn thuốc/ngày", desc: "Dự báo & yêu cầu đặt hàng", url: "https://dubaodonhang01.netlify.app/", category: "sales", icon: "ic-6", backup: false },
-            { id: 7, title: "Kiểm tra hóa đơn Số lô - Hạn Dùng", desc: "Kiểm tra 5 ngày lưu", url: "https://kiemtrahoadon12026.netlify.app", category: "sales", icon: "ic-7", backup: false },
-            { id: 8, title: "Kiểm Tra Giá CNT & Dự Báo", desc: "So sánh giá chuỗi Nhà thuốc", url: "https://kiemtracnt-dathang.netlify.app/", category: "sales", icon: "ic-8", backup: false },
-            { id: 9, title: "Tìm khách hàng & Tra cứu SĐT", desc: "Công cụ Sales 01", url: "https://timkhachhang2.netlify.app/", category: "sales", icon: "ic-9", backup: false },
-            { id: 10, title: "Lọc khách hàng từ Link Web", desc: "Công cụ Sales 02", url: "https://lockhachhang.netlify.app/", category: "sales", icon: "ic-10", backup: false },
-            { id: 11, title: "Tạo Prompt Poster", desc: "Content quảng cáo tự động", url: "https://taoprompt2026.netlify.app/", category: "sales", icon: "ic-11", backup: false },
-            { id: 12, title: "Tạo Ảnh & Video AI", desc: "Thiết kế & Giải trí", url: "https://idecoweb.netlify.app/", category: "sales", icon: "ic-12", backup: false },
-            { id: 13, title: "Lập kế hoạch tuần", desc: "Backup System", url: "https://ideco-kehoach.netlify.app/", category: "Special", icon: "ic-13", backup: true },
-            { id: 14, title: "Tư Vấn Kế toán Kho - Voice AI", desc: "Hỏi đáp bằng giọng nói", url: "https://trochuyen.netlify.app/", category: "special", icon: "ic-14", backup: false },
-            { id: 15, title: "Tìm hiểu nghiệp vụ kế toán", desc: "Hỏi đáp chuyên môn", url: "https://ketoanideco.netlify.app", category: "special", icon: "ic-15", backup: false },
-            { id: 16, title: "Cắt ảnh", desc: "Cắt ảnh theo ý muốn", url: "https://scrop-ideco01.netlify.app", category: "special", icon: "ic-16", backup: false },
-            { id: 17, title: "Cắt ảnh - đồng nhất nhân vật", desc: "Tạo prompt ảnh", url: "https://hilarious-palmier-bf2f24.netlify.app/", category: "special", icon: "ic-17", backup: false },
-            { id: 18, title: "Tạo Podcast", desc: "Chuyển giọng nói thành văn bản", url: "https://thauam-01.netlify.app/", category: "special", icon: "ic-18", backup: false },
-			 { id: 19, title: "Xóa ảnh AI ", desc: "Xoa watermarket video- ảnh ", url: "https://magiceraser.org/background-eraser/", category: "special", icon: "ic-19", backup: false },
-			 { id: 20, title: "HỌP - BIÊN BẢN HỌP ", desc: "Trợ lý cuộc họp ", url: "https://meeting-ideco1.netlify.app/", category: "Sales", icon: "ic-20", backup: false },
-			 { id: 21, title: "SOẠN THƯ THÔNG BÁO  ", desc: "Trợ lý cuộc họp ", url: "https://soanthu3.netlify.app/", category: "Sales", icon: "ic-21", backup: false },
-			  { id: 22, title: "LẬP KẾ HOẠCH TUẦN ", desc: "Trợ lý cuộc họp ", url: "https://ideco-kehoach.netlify.app/", category: "Sales", icon: "ic-22", backup: false },
-			    { id: 23, title: "SOẠN THƯ THÔNG BÁO ", desc: " Thư thông báo kh ", url: "https://soanthu3.netlify.app/", category: "Sales", icon: "ic-23", backup: false },
-           { id: 24, title: "Tra cứu Bảng giá thuốc tổng ", desc: " Thư thông báo kh ", url: "https://congtyideco.github.io/xemthuoc/", category: "Sales", icon: "ic-24", backup: false },
-		{ id: 25, title: "Báo giá thuốc bằng Ảnh ", desc: " Thư thông báo kh ", url: "https://ideco-thuoc2.netlify.app", category: "Sales", icon: "ic-25", backup: false },
-		{ id: 26, title: "Tìm lọc khách hàng 06  ", desc: " Họp trực tuyến ", url: "https://timkhachhang06.netlify.app", category: "Sales", icon: "ic-26", backup: false }
-		];
+/* ============================================================
+   DATA — Toàn bộ công cụ giữ nguyên link gốc
+   ============================================================ */
+const CATEGORIES = {
+  legal:   { name:'PHÁP LÝ · CHIẾN LƯỢC', desc:'Hợp đồng · Biên bản · Quản trị tổ chức', emoji:'⚖️' },
+  inv:     { name:'KHO VẬN · KẾ TOÁN',     desc:'Phiếu kho FEFO · Hóa đơn VAT · P&L',    emoji:'📦' },
+  sales:   { name:'KINH DOANH · MARKETING',desc:'Khách hàng · Đơn hàng · Nội dung sales',emoji:'🎨' },
+  special: { name:'ĐÀO TẠO · NGHIỆP VỤ',   desc:'Chatbot huấn luyện · Voice · Podcast · Video AI', emoji:'🤖' }
+};
 
-        const iconUrls = {
-            'ic-1': 'https://cdn.imgpile.com/f/1UiGSHo_xl.jpg',
-            'ic-2': 'https://cdn.imgpile.com/f/Mp1aYLX_xl.jpg',
-            'ic-3': 'https://cdn.imgpile.com/f/6CauYxv_xl.jpg',
-            'ic-4': 'https://cdn.imgpile.com/f/PSAD1X9_xl.jpg',
-            'ic-5': 'https://cdn.imgpile.com/f/9xD5hF3_xl.jpg',
-            'ic-6': 'https://cdn.imgpile.com/f/ff6aL6c_xl.jpg',
-            'ic-7': 'https://cdn.imgpile.com/f/gdbuIQP_xl.jpg',
-            'ic-8': 'https://cdn.imgpile.com/f/T0AxrIH_xl.jpg',
-            'ic-9': 'https://cdn.imgpile.com/f/gyRxseP_xl.jpg',
-            'ic-10': 'https://cdn.imgpile.com/f/mAU1ZD6_xl.jpg',
-            'ic-11': 'https://cdn.imgpile.com/f/mAU1ZD6_xl.jpg',
-            'ic-12': 'https://cdn.imgpile.com/f/mAU1ZD6_xl.jpg',
-            'ic-13': 'https://cdn.imgpile.com/f/mAU1ZD6_xl.jpg',
-            'ic-14': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-            'ic-15': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-            'ic-16': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-            'ic-17': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-            'ic-18': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-			 'ic-19': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-			 'ic-20': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-			'ic-21': 'https://cdn.imgpile.com/f/4sPHL4H_xl.jpg',
-			'ic-22': 'https://cdn.imgpile.com/f/iFo0Uhy_xl.jpg',
-			'ic-23': 'https://cdn.imgpile.com/f/iFo0Uhy_xl.jpg',
-			'ic-24': 'https://cdn.imgpile.com/f/iFo0Uhy_xl.jpg',
-			'ic-25': 'https://cdn.imgpile.com/f/iFo0Uhy_xl.jpg',
-			'ic-26': 'https://cdn.imgpile.com/f/0AA1nlh_xl.jfif'
-        };
+const TOOLS = [
+  /* ===== PHÁP LÝ ===== */
+  { id:'L01', cat:'legal', icon:'https://cdn.imgpile.com/f/1UiGSHo_xl.jpg',
+    url:'https://aistudio.google.com/apps/0b328be2-b1da-4843-b3ae-ac862fe8cb48?showPreview=true&showAssistant=true&fullscreenApplet=true',
+    title:'BỘ PHẬN PHÁP LÝ — Tra cứu, biên bản, hợp đồng, hỏi đáp (Phần 1)',
+    sub:'Chỉ áp dụng khi mở từ Chrome ERP: baocaoideco@gmail.com',
+    tag:{type:'erp', text:'Mở trong Chrome ERP'} },
+  { id:'L02', cat:'legal', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://ideco-phaply.netlify.app',
+    title:'IDECO Pháp lý — Soạn hợp đồng, biên bản đổi trả (Phần 2)',
+    sub:'Soạn hợp đồng, biên bản, phân tích HĐ' },
+  { id:'L03', cat:'legal', icon:'https://cdn.imgpile.com/f/6CauYxv_xl.jpg',
+    url:'https://ideco-kehoach.netlify.app',
+    title:'Lập kế hoạch tuần — IDECO AI',
+    sub:'Áp dụng cho mọi nhân viên' },
+  { id:'L04', cat:'legal', icon:'https://cdn.imgpile.com/f/PSAD1X9_xl.jpg',
+    url:'https://meeting-ideco1.netlify.app',
+    title:'Thư ký họp AI — Biên bản họp',
+    sub:'Trợ lý ghi và tổng hợp cuộc họp' },
+  { id:'L05', cat:'legal', icon:'https://cdn.imgpile.com/f/9xD5hF3_xl.jpg',
+    url:'https://aistudio.google.com/apps/4c7ec8d7-d38a-4d01-b700-df5d00a3512a?showAssistant=true&showPreview=true&fullscreenApplet=true',
+    title:'Tra cứu thông tin thuốc',
+    sub:'Giá kê khai, dược thư' },
 
-        const categoryNames = {
-            all: "📋 Tất cả công cụ",
-            sales: "💼 Kinh doanh & Marketing",
-            inventory: "📦 Kho vận & Kế toán",
-            special: "🎓 Đào tạo & Tiện ích"
-        };
+  /* ===== KHO VẬN · KẾ TOÁN ===== */
+  { id:'I01', cat:'inv', icon:'https://cdn.imgpile.com/f/ff6aL6c_xl.jpg',
+    url:'https://phantichphieu.netlify.app/',
+    title:'Xử lý phiếu thuốc giao — FEFO',
+    sub:'Nhập liệu biên bản · Kho' },
+  { id:'I02', cat:'inv', icon:'https://cdn.imgpile.com/f/gdbuIQP_xl.jpg',
+    url:'https://aistudio.google.com/apps/drive/1fHglOZ1s6mOb0TivIkHPiV8jQVlcurf-?showPreview=true&showAssistant=true&fullscreenApplet=true',
+    title:'Xử lý phiếu thuốc giao FEFO',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'I03', cat:'inv', icon:'https://cdn.imgpile.com/f/T0AxrIH_xl.jpg',
+    url:'https://lancuoi.netlify.app',
+    title:'Đơn thuốc — Hóa đơn VAT',
+    sub:'Tổng hợp đơn hàng · Hóa đơn VAT' },
+  { id:'I04', cat:'inv', icon:'https://cdn.imgpile.com/f/T0AxrIH_xl.jpg',
+    url:'https://aistudio.google.com/apps/drive/16fG5pi7OBeO2wYWnr4syfWs0Vv_nh4CH?showAssistant=true&showPreview=true',
+    title:'Đơn thuốc — Hóa đơn VAT',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'I05', cat:'inv', icon:'https://cdn.imgpile.com/f/mAU1ZD6_xl.jpg',
+    url:'https://phantichbanggia.netlify.app/',
+    title:'Phân tích giá thuốc',
+    sub:'Phân tích chiết khấu trên ERP' },
+  { id:'I06', cat:'inv', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://idecokhovan.netlify.app',
+    title:'Quản lý đóng gói — giao nhận',
+    tag:{type:'tip', text:'Lưu trên mobile để giao dịch mọi lúc'} },
+  { id:'I07', cat:'inv', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://aistudio.google.com/apps/bd395a01-7337-425b-8797-abd4f0f1658e?showPreview=true&showAssistant=true',
+    title:'Soạn thư bởi AI',
+    tag:{type:'erp', text:'Mở trong Chrome ERP: baocaoideco@gmail.com'} },
 
-        // Authentication
-        const CORRECT_PASSWORD = "ideco#2026";
-        let currentCategory = 'all';
-        let searchTerm = '';
+  /* ===== KINH DOANH · MARKETING ===== */
+  { id:'S01', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://idecokhachhang3.netlify.app/',
+    title:'Khai giao dịch khách hàng',
+    sub:'Tạo APP trên điện thoại' },
+  { id:'S02', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://soanthu5.netlify.app/',
+    title:'Viết thư thông báo tình trạng SP — xác nhận đơn mua thuốc',
+    sub:'Soạn thư qua AI IDECO' },
+  { id:'S03', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://dubaodathang.netlify.app/',
+    title:'Khai báo đơn hàng thuốc cần đặt mỗi ngày',
+    sub:'Dự báo & yêu cầu đặt hàng' },
+  { id:'S04', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://aistudio.google.com/apps/drive/1GLirexPXzFXhfDblEs-cXNS8VF-Jv84a?showPreview=true&showAssistant=true&fullscreenApplet=true',
+    title:'Tổng hợp đơn thuốc / ngày',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'S05', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://kiemtrahoadon12026.netlify.app',
+    title:'Theo dõi & kiểm tra hóa đơn bởi AI',
+    tag:{type:'tip', text:'Cần nắm thông tin hóa đơn'} },
+  { id:'S06', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://aistudio.google.com/apps/drive/1oVYCjv3X_bCSbYyCdZoLkvadOogML203?showPreview=true&showAssistant=true&fullscreenApplet=true',
+    title:'Theo dõi hóa đơn — kiểm tra hóa đơn bởi AI',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'S07', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://kiemtracnt-dathang.netlify.app/',
+    title:'Kiểm tra đơn hàng CNT — dự báo đặt hàng',
+    sub:'So sánh giá chuỗi nhà thuốc' },
+  { id:'S08', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://aistudio.google.com/apps/drive/1shNnk8jYFKkzL-inpvpIKjkP6gc_PvN0?showPreview=true&showAssistant=true&fullscreenApplet=true',
+    title:'Kiểm tra đơn hàng CNT — dự báo đặt hàng',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'S09', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://idecolockhachhang01.netlify.app/',
+    title:'Lọc danh sách khách hàng theo Excel chuẩn',
+    sub:'Công cụ Sales 01' },
+  { id:'S10', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://aistudio.google.com/apps/d3f1f397-6e4e-4ef8-a0a2-19776fdac4e2?showPreview=true&showAssistant=true&fullscreenApplet=true',
+    title:'Tìm kiếm số điện thoại khách hàng',
+    tag:{type:'erp', text:'Mở trong Chrome ERP: baocaoideco@gmail.com'} },
+  { id:'S11', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://loctimcongty.netlify.app/',
+    title:'Lọc dữ liệu khách hàng theo định dạng Excel',
+    sub:'Công cụ Sales 02' },
+  { id:'S12', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://taoprompt2026.netlify.app/',
+    title:'Tạo prompt làm banner báo giá thuốc',
+    sub:'Content quảng cáo tự động' },
+  { id:'S13', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://congtyideco.github.io/khachhang-sanpham/',
+    title:'Phân tích sản phẩm khách hàng đã đặt trong kỳ',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'S14', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://hilarious-palmier-bf2f24.netlify.app/',
+    title:'Cắt chỉnh ảnh — điều chỉnh Lightroom',
+    sub:'Thiết kế & giải trí' },
+  { id:'S15', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://scrop-ideco01.netlify.app/',
+    title:'Cắt chỉnh ảnh',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'S16', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://video-ideco.netlify.app/',
+    title:'Capture frame video — tạo video',
+    tag:{type:'backup', text:'Backup System'} },
+  { id:'S17', cat:'sales', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://timanhthuoc.netlify.app',
+    title:'Tìm ảnh thuốc đồng loạt từ Excel',
+    tag:{type:'erp', text:'Mở trong Chrome ERP: baocaoideco@gmail.com'} },
 
-        function unlockApp() {
-            document.body.classList.add('authenticated');
-            renderTools();
-            updateStats();
-            attachEvents();
-        }
+  /* ===== ĐÀO TẠO · NGHIỆP VỤ ===== */
+  { id:'T01', cat:'special', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://trochuyen05.netlify.app/',
+    title:'Hỏi đáp huấn luyện bằng Chatbot',
+    sub:'Phục vụ trên Mobile · ERP công ty' },
+  { id:'T02', cat:'special', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://trochuyen04.netlify.app/',
+    title:'Hỏi & đáp — huấn luyện, quản lý công ty bằng Voice',
+    sub:'Hỏi giọng nói · Chatbot' },
+  { id:'T03', cat:'special', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://ketoanideco.netlify.app',
+    title:'Tìm hiểu nghiệp vụ kế toán',
+    sub:'Hỏi đáp chuyên môn' },
+  { id:'T04', cat:'special', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://thauam-02.netlify.app/',
+    title:'Tạo kịch bản Podcast bởi AI',
+    sub:'Áp dụng cho đào tạo' },
+  { id:'T05', cat:'special', icon:'https://cdn.imgpile.com/f/L8djh0A_xl.jpg',
+    url:'https://idecovideo01.netlify.app/',
+    title:'Dựng video bởi AI',
+    sub:'Tạo frame cuối video' }
+];
 
-        function renderTools() {
-            const toolsGrid = document.getElementById('toolsGrid');
-            if (!toolsGrid) return;
+/* ============================================================
+   AUTH — Mật khẩu obfuscated bằng base64 ('ideco#2026')
+   ============================================================ */
+const _PWD_HASH = 'aWRlY28jMjAyNg=='; // base64('ideco#2026')
+const SESSION_KEY = 'ideco_ai_unlocked_v2026';
+const FAV_KEY = 'ideco_ai_favs_v2026';
 
-            let filteredTools = aiTools;
-            
-            // Filter by category
-            if (currentCategory !== 'all') {
-                filteredTools = aiTools.filter(tool => tool.category === currentCategory);
-            }
-            
-            // Filter by search
-            if (searchTerm) {
-                filteredTools = filteredTools.filter(tool => 
-                    tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    tool.desc.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-            }
+function checkPassword(input){
+  try { return btoa(input) === _PWD_HASH; }
+  catch(e){ return false; }
+}
 
-            // Update count
-            document.getElementById('toolsCount').textContent = `${filteredTools.length} công cụ`;
-            document.getElementById('categoryTitle').textContent = categoryNames[currentCategory];
+function isUnlocked(){
+  try { return sessionStorage.getItem(SESSION_KEY) === '1'; }
+  catch(e){ return false; }
+}
+function setUnlocked(v){
+  try { v ? sessionStorage.setItem(SESSION_KEY,'1') : sessionStorage.removeItem(SESSION_KEY); } catch(e){}
+}
 
-            toolsGrid.innerHTML = '';
-            filteredTools.forEach(tool => {
-                const toolCard = document.createElement('div');
-                toolCard.className = 'tool-card';
-                toolCard.innerHTML = `
-                    <div class="tool-icon-wrapper">
-                        <div class="tool-icon" data-url="${tool.url}" style="background-image: url('${iconUrls[tool.icon]}')"></div>
-                        ${tool.backup ? '<span class="tool-backup-badge">BACKUP</span>' : ''}
-                    </div>
-                    <div class="tool-info">
-                        <div class="tool-title">
-                            ${tool.title}
-                            <span class="tool-id">#${tool.id}</span>
-                        </div>
-                        <div class="tool-desc">${tool.desc}</div>
-                        <div class="tool-meta">
-                            <span class="tool-category-tag">
-                                <i class="fas ${getCategoryIcon(tool.category)}"></i>
-                                ${getCategoryName(tool.category)}
-                            </span>
-                        </div>
-                    </div>
-                `;
-                toolsGrid.appendChild(toolCard);
-            });
+/* ============================================================
+   FAVORITES (localStorage)
+   ============================================================ */
+function getFavs(){
+  try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); }
+  catch(e){ return []; }
+}
+function setFavs(arr){
+  try { localStorage.setItem(FAV_KEY, JSON.stringify(arr)); } catch(e){}
+}
+function isFav(id){ return getFavs().includes(id); }
+function toggleFav(id){
+  const favs = getFavs();
+  const i = favs.indexOf(id);
+  if (i >= 0) favs.splice(i,1);
+  else favs.push(id);
+  setFavs(favs);
+  return i < 0;
+}
 
-            // Add click events to icons
-            document.querySelectorAll('.tool-icon').forEach(icon => {
-                icon.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const url = this.getAttribute('data-url');
-                    if (url) window.open(url, '_blank');
-                });
-            });
-        }
+/* ============================================================
+   STATE
+   ============================================================ */
+let state = {
+  cat: 'all',
+  query: ''
+};
 
-        function getCategoryIcon(category) {
-            switch(category) {
-                case 'sales': return 'fa-chart-line';
-                case 'inventory': return 'fa-box';
-                case 'special': return 'fa-graduation-cap';
-                default: return 'fa-toolbox';
-            }
-        }
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function el(html){
+  const t = document.createElement('template');
+  t.innerHTML = html.trim();
+  return t.content.firstElementChild;
+}
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+function normalize(s){
+  return (s||'').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/đ/g,'d');
+}
+function showToast(msg, ms=1800){
+  const t = document.getElementById('toast');
+  t.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>${escapeHTML(msg)}</span>`;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.classList.remove('show'), ms);
+}
 
-        function getCategoryName(category) {
-            switch(category) {
-                case 'sales': return 'Kinh doanh';
-                case 'inventory': return 'Kho vận';
-                case 'special': return 'Đào tạo';
-                default: return 'Khác';
-            }
-        }
+/* ============================================================
+   RENDER
+   ============================================================ */
+function buildCard(t){
+  const fav = isFav(t.id);
+  const tagHTML = t.tag
+    ? `<span class="card-tag tag-${t.tag.type}">${escapeHTML(t.tag.text)}</span>`
+    : '';
+  const subHTML = t.sub ? `<span class="card-sub">${escapeHTML(t.sub)}</span>` : '';
+  return `
+    <div class="card-pos" data-id="${t.id}">
+      <a class="card" data-cat="${t.cat}" href="${t.url}" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon" style="background-image:url('${t.icon}')"></div>
+        <div class="card-body">
+          <span class="card-title">${escapeHTML(t.title)}</span>
+          ${subHTML}
+          ${tagHTML}
+        </div>
+        <span class="card-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
+      <button class="card-fav ${fav?'active':''}" data-fav="${t.id}" aria-label="Yêu thích" aria-pressed="${fav}">
+        <svg viewBox="0 0 24 24" fill="${fav?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.1 8.6 22 9.5 17 14.4 18.5 21.5 12 18 5.5 21.5 7 14.4 2 9.5 8.9 8.6 12 2"/>
+        </svg>
+      </button>
+    </div>`;
+}
 
-        function updateStats() {
-            const salesCount = aiTools.filter(t => t.category === 'sales').length;
-            const inventoryCount = aiTools.filter(t => t.category === 'inventory').length;
-            const specialCount = aiTools.filter(t => t.category === 'special').length;
+function buildSection(catKey, items){
+  if (!items.length) return '';
+  const c = catKey === 'favorites'
+    ? { name:'CÔNG CỤ YÊU THÍCH', desc:'Đã ghim để truy cập nhanh', emoji:'⭐' }
+    : CATEGORIES[catKey];
+  return `
+    <section class="section">
+      <header class="section-head">
+        <div class="section-icon" data-cat="${catKey}">${c.emoji}</div>
+        <div class="section-meta">
+          <div class="section-name" data-cat="${catKey}">${c.name}</div>
+          <div class="section-desc">${escapeHTML(c.desc)}</div>
+        </div>
+        <span class="section-badge">${items.length}</span>
+      </header>
+      <div class="cards">
+        ${items.map(buildCard).join('')}
+      </div>
+    </section>`;
+}
 
-            document.getElementById('totalTools').textContent = aiTools.length;
-            document.getElementById('salesCount').textContent = salesCount;
-            document.getElementById('inventoryCount').textContent = inventoryCount;
-            document.getElementById('allCount').textContent = aiTools.length;
-            document.getElementById('salesCount2').textContent = salesCount;
-            document.getElementById('inventoryCount2').textContent = inventoryCount;
-            document.getElementById('specialCount').textContent = specialCount;
-        }
+function getFiltered(){
+  const q = normalize(state.query);
+  return TOOLS.filter(t => {
+    if (!q) return true;
+    const hay = normalize(t.title + ' ' + (t.sub||'') + ' ' + (t.tag?.text||''));
+    return hay.includes(q);
+  });
+}
 
-        function attachEvents() {
-            // Category selection
-            document.querySelectorAll('.category-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.category-item').forEach(c => c.classList.remove('active'));
-                    item.classList.add('active');
-                    currentCategory = item.getAttribute('data-category');
-                    renderTools();
-                });
-            });
+function render(){
+  const content = document.getElementById('content');
+  const all = getFiltered();
+  const q = state.query.trim();
 
-            // Search
-            document.getElementById('searchInput').addEventListener('input', (e) => {
-                searchTerm = e.target.value;
-                renderTools();
-            });
+  // Update tab counts
+  document.querySelector('[data-count="all"]').textContent = TOOLS.length;
+  document.querySelector('[data-count="favorites"]').textContent = getFavs().length;
+  Object.keys(CATEGORIES).forEach(k => {
+    const c = TOOLS.filter(t => t.cat === k).length;
+    document.querySelector(`[data-count="${k}"]`).textContent = c;
+  });
 
-            // FAB Modal
-            const fab = document.getElementById('fabButton');
-            const modalOverlay = document.getElementById('modalOverlay');
-            const modalContainer = document.getElementById('modalContainer');
-            const modalClose = document.getElementById('modalClose');
-            const modalToolsList = document.getElementById('modalToolsList');
+  let html = '';
 
-            fab.addEventListener('click', () => {
-                modalOverlay.classList.add('active');
-                modalContainer.classList.add('active');
-                
-                // Render all tools in modal
-                modalToolsList.innerHTML = '';
-                aiTools.forEach(tool => {
-                    const toolItem = document.createElement('div');
-                    toolItem.className = `modal-tool-item ${tool.category}`;
-                    toolItem.innerHTML = `
-                        <div class="modal-tool-icon" data-url="${tool.url}" style="background-image: url('${iconUrls[tool.icon]}')"></div>
-                        <div class="tool-info">
-                            <div class="tool-title">${tool.title}</div>
-                            <div class="tool-desc">${tool.desc}</div>
-                        </div>
-                    `;
-                    modalToolsList.appendChild(toolItem);
-                });
+  if (q) {
+    // Search mode: show all matching, grouped by category
+    if (!all.length) {
+      html = `
+        <div class="empty">
+          <div class="empty-emoji">🔍</div>
+          <div class="empty-title">Không tìm thấy công cụ phù hợp</div>
+          <div class="empty-sub">Thử từ khóa khác như "hợp đồng", "kho", "VAT"…</div>
+        </div>`;
+    } else {
+      ['legal','inv','sales','special'].forEach(k => {
+        html += buildSection(k, all.filter(t => t.cat === k));
+      });
+    }
+  }
+  else if (state.cat === 'all') {
+    ['legal','inv','sales','special'].forEach(k => {
+      html += buildSection(k, TOOLS.filter(t => t.cat === k));
+    });
+  }
+  else if (state.cat === 'favorites') {
+    const favs = getFavs();
+    const favTools = TOOLS.filter(t => favs.includes(t.id));
+    if (!favTools.length) {
+      html = `
+        <div class="empty">
+          <div class="empty-emoji">⭐</div>
+          <div class="empty-title">Chưa có công cụ yêu thích</div>
+          <div class="empty-sub">Bấm vào ngôi sao trên mỗi thẻ để ghim<br>truy cập nhanh tại đây</div>
+        </div>`;
+    } else {
+      html = buildSection('favorites', favTools);
+    }
+  }
+  else {
+    html = buildSection(state.cat, TOOLS.filter(t => t.cat === state.cat));
+  }
 
-                // Add click events to modal icons
-                document.querySelectorAll('.modal-tool-icon').forEach(icon => {
-                    icon.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const url = this.getAttribute('data-url');
-                        if (url) window.open(url, '_blank');
-                    });
-                });
-            });
+  content.innerHTML = html;
+  content.scrollTop = 0;
+}
 
-            modalClose.addEventListener('click', () => {
-                modalOverlay.classList.remove('active');
-                modalContainer.classList.remove('active');
-            });
+/* ============================================================
+   EVENT WIRING
+   ============================================================ */
+function unlockApp(){
+  document.getElementById('lock').classList.add('hidden');
+  document.getElementById('lock').setAttribute('aria-hidden','true');
+  const app = document.getElementById('app');
+  app.classList.add('show');
+  app.setAttribute('aria-hidden','false');
+  setUnlocked(true);
+  render();
+  setTimeout(()=>document.getElementById('search-input').blur(), 100);
+}
 
-            modalOverlay.addEventListener('click', () => {
-                modalOverlay.classList.remove('active');
-                modalContainer.classList.remove('active');
-            });
+function lockApp(){
+  setUnlocked(false);
+  document.getElementById('app').classList.remove('show');
+  document.getElementById('app').setAttribute('aria-hidden','true');
+  document.getElementById('lock').classList.remove('hidden');
+  document.getElementById('lock').setAttribute('aria-hidden','false');
+  document.getElementById('lock-input').value = '';
+  closeSheet();
+  setTimeout(()=>document.getElementById('lock-input').focus(), 350);
+}
 
-            // Bottom navigation
-            document.querySelectorAll('[data-nav]').forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.querySelectorAll('[data-nav]').forEach(n => n.classList.remove('active'));
-                    item.classList.add('active');
-                    
-                    const nav = item.getAttribute('data-nav');
-                    if (nav === 'home') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else if (nav === 'categories') {
-                        document.querySelector('.categories-section').scrollIntoView({ behavior: 'smooth' });
-                    } else if (nav === 'profile') {
-                        alert('Tính năng đang phát triển');
-                    }
-                });
-            });
-        }
+/* Lock screen submit */
+document.getElementById('lock-card').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = document.getElementById('lock-input');
+  const error = document.getElementById('lock-error');
+  const card = document.getElementById('lock-card');
+  if (checkPassword(input.value)) {
+    error.classList.remove('show');
+    unlockApp();
+  } else {
+    error.classList.add('show');
+    card.classList.remove('shake');
+    void card.offsetWidth; // restart animation
+    card.classList.add('shake');
+    input.select();
+  }
+});
+document.getElementById('lock-input').addEventListener('input', () => {
+  document.getElementById('lock-error').classList.remove('show');
+});
 
-        // Login handlers
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            const password = document.getElementById('passwordInput').value;
-            if (password === CORRECT_PASSWORD) {
-                unlockApp();
-            } else {
-                document.getElementById('loginError').textContent = '❌ Mật khẩu không đúng';
-                document.getElementById('passwordInput').value = '';
-            }
-        });
+/* Show/hide password */
+document.getElementById('lock-toggle').addEventListener('click', () => {
+  const i = document.getElementById('lock-input');
+  const isPwd = i.type === 'password';
+  i.type = isPwd ? 'text' : 'password';
+  document.getElementById('eye-show').style.display = isPwd ? 'none' : '';
+  document.getElementById('eye-hide').style.display = isPwd ? '' : 'none';
+  i.focus();
+});
 
-        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') document.getElementById('loginBtn').click();
-        });
+/* Tabs */
+document.getElementById('tabs').addEventListener('click', (e) => {
+  const tab = e.target.closest('.tab');
+  if (!tab) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  state.cat = tab.dataset.cat;
+  // Clear search when switching tabs (more intuitive)
+  if (state.query) {
+    state.query = '';
+    document.getElementById('search-input').value = '';
+    document.getElementById('search-clear').classList.remove('show');
+  }
+  render();
+  // Scroll active tab into view
+  tab.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+});
 
-        // Double-tap prevention
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) e.preventDefault();
-            lastTouchEnd = now;
-        }, false);
-    </script>
+/* Search */
+const sInput = document.getElementById('search-input');
+const sClear = document.getElementById('search-clear');
+let searchTimer;
+sInput.addEventListener('input', () => {
+  state.query = sInput.value;
+  sClear.classList.toggle('show', !!sInput.value);
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(render, 120);
+});
+sClear.addEventListener('click', () => {
+  sInput.value = '';
+  state.query = '';
+  sClear.classList.remove('show');
+  render();
+  sInput.focus();
+});
+
+/* Favorites (delegate) */
+document.getElementById('content').addEventListener('click', (e) => {
+  const fav = e.target.closest('[data-fav]');
+  if (!fav) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const id = fav.dataset.fav;
+  const nowFav = toggleFav(id);
+  fav.classList.toggle('active', nowFav);
+  fav.setAttribute('aria-pressed', String(nowFav));
+  const svg = fav.querySelector('svg');
+  if (svg) svg.setAttribute('fill', nowFav ? 'currentColor' : 'none');
+  // Update favorites count
+  document.querySelector('[data-count="favorites"]').textContent = getFavs().length;
+  // If on favorites tab, re-render to remove unstarred item
+  if (state.cat === 'favorites' && !nowFav) render();
+  showToast(nowFav ? '⭐ Đã thêm vào Yêu thích' : 'Đã bỏ khỏi Yêu thích');
+});
+
+/* QR */
+function openQR(){
+  document.getElementById('qr-overlay').classList.add('show');
+}
+function closeQR(){
+  document.getElementById('qr-overlay').classList.remove('show');
+}
+document.getElementById('qr-btn').addEventListener('click', openQR);
+document.getElementById('qr-close').addEventListener('click', closeQR);
+document.getElementById('qr-overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'qr-overlay') closeQR();
+});
+
+/* Menu sheet */
+function openSheet(){
+  document.getElementById('sheet-overlay').classList.add('show');
+  document.getElementById('sheet').classList.add('show');
+}
+function closeSheet(){
+  document.getElementById('sheet-overlay').classList.remove('show');
+  document.getElementById('sheet').classList.remove('show');
+}
+document.getElementById('menu-btn').addEventListener('click', openSheet);
+document.getElementById('sheet-overlay').addEventListener('click', closeSheet);
+document.getElementById('menu-qr').addEventListener('click', () => { closeSheet(); openQR(); });
+document.getElementById('menu-about').addEventListener('click', () => {
+  closeSheet();
+  showToast('AI IDECO 2026 · Tự hào chuyển đổi số', 2400);
+});
+document.getElementById('menu-lock').addEventListener('click', () => {
+  closeSheet();
+  setTimeout(lockApp, 250);
+});
+
+/* Keyboard shortcuts */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('qr-overlay').classList.contains('show')) closeQR();
+    else if (document.getElementById('sheet').classList.contains('show')) closeSheet();
+  }
+  // Ctrl/Cmd + K to focus search (when unlocked)
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k' && isUnlocked()) {
+    e.preventDefault();
+    document.getElementById('search-input').focus();
+  }
+});
+
+/* Swipe down to close sheet */
+let sheetStartY = null;
+const sheetEl = document.getElementById('sheet');
+sheetEl.addEventListener('touchstart', e => { sheetStartY = e.touches[0].clientY; });
+sheetEl.addEventListener('touchmove', e => {
+  if (sheetStartY === null) return;
+  const dy = e.touches[0].clientY - sheetStartY;
+  if (dy > 0) sheetEl.style.transform = `translateY(${dy}px)`;
+});
+sheetEl.addEventListener('touchend', e => {
+  if (sheetStartY === null) return;
+  const dy = (e.changedTouches[0].clientY) - sheetStartY;
+  sheetEl.style.transform = '';
+  if (dy > 80) closeSheet();
+  sheetStartY = null;
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+(function init(){
+  if (isUnlocked()) {
+    document.getElementById('lock').classList.add('hidden');
+    document.getElementById('lock').setAttribute('aria-hidden','true');
+    const app = document.getElementById('app');
+    app.classList.add('show');
+    app.setAttribute('aria-hidden','false');
+    render();
+  } else {
+    setTimeout(() => document.getElementById('lock-input').focus(), 400);
+  }
+})();
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
